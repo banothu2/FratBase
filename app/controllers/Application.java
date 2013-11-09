@@ -14,4 +14,5 @@ public class Application extends Controller {
     public static Result loggedIn(){
     	return ok(loggedIn.render("You are logged in!"));
     }
+
 }

@@ -4,7 +4,7 @@
 <html>
 <body>
 <p>@message</p>
-<form action="/auth/register" method="POST">
+<form action="@routes.Authentication.registerUser()" method="POST">
 	First name: <input type="text" name="FirstName" value=""><br>
 	Last name:	<input type="text" name="LastName" value=""><br>
 	Username: 	<input type="text" name="username" value=""><br>
