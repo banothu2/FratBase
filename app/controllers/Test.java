@@ -14,17 +14,17 @@ public class Test extends Controller {
 
     public static Result users() {
         List<User> users = User.find.all();
-        
-        return ok(users.get(0).name);
+
+        return ok(users.get(3).username);
     }
     
-    public static Result create() {
+    public static Result create(LoginModel data) {
     	
     	User user = new User();
-    	user.name = "Blah";
-    	user.username = "username";
-    	user.passwordHash = User.hash("password");
-    	user.email = "email";
+    	user.name = data.firstName;
+    	user.username = data.username;
+    	user.passwordHash = User.hash(data.password);
+    	user.email = data.email;
     	user.save();
 
     	return ok("wuhi: " + user.id);
@@ -36,8 +36,11 @@ public class Test extends Controller {
     
     public static Result doLogin() {
     	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
-    	return ok(data.email + data.password);
+        return create(data);
+        //ok("Created user with email: " + data.email);
+        //return ok(data.email +" "+ data.password + " "+ data.firstName + " "+ data.lastName + " "+ data.university + " "+ data.greek);
     }
 }
+
 
 

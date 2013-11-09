@@ -1,0 +1,8 @@
+int main (){
+	// declare integer 
+	int divident; 
+	// to make a pointer that points to memory in divident:
+	int * pointer;
+	pointer = &divident; // linked together 
+
+}
