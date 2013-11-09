@@ -36,7 +36,7 @@ public class Test extends Controller {
     
     public static Result doLogin() {
     	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
-    	return ok(data.email);
+    	return ok(data.email + data.password);
     }
 }
 

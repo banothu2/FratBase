@@ -4,11 +4,16 @@ import play.*;
 import play.mvc.*;
 
 import views.html.*;
+import auth.Auth;
 
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("Your new application is Ready NOt!."));
+    	if(!Auth.isLoggedIn()){
+        	return ok(index.render("Your."));
+    	} else {
+        	return ok(index.render("Your new application is Ready."));
+    	}
     }
 
     public static Result loggedIn(){

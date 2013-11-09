@@ -43,7 +43,7 @@ public class Auth {
 		return User.find.byId(userId);
 	}
 	
-	public boolean isLoggedIn() {
+	public static boolean isLoggedIn() {
 		return getUserId() != null;
 	}
 }
