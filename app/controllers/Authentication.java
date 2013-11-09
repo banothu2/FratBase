@@ -8,7 +8,7 @@ import views.html.*;
 public class Authentication extends Controller {
 
     public static Result register() {
-        return ok(register.render("Please Log In"));
+        return ok(register.render("Please Register at Frat-Base"));
     }
 
 

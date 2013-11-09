@@ -4,12 +4,21 @@
 <html>
 <body>
 <p>@message</p>
-<form action="demo_form.asp">
-First name: <input type="text" name="FirstName" value="Mickey"><br>
-Last name: <input type="text" name="LastName" value="Mouse"><br>
-Username: <input type="text" name="username" value="Mouse"><br>
-Password <input type="password" name="password" value="Mouse"><br>
-<input type="submit" value="Submit">
+<form action="/auth/register" method="POST">
+	First name: <input type="text" name="FirstName" value=""><br>
+	Last name:	<input type="text" name="LastName" value=""><br>
+	Username: 	<input type="text" name="username" value=""><br>
+	Password 	<input type="password" name="password" value=""><br>
+	University 	<select>
+					<option value="UIUC">University Of Illinois</option>
+				</select>
+	<br>
+	Greek		<select>
+					<option value="CS411">CS 411 Fraternity</option>
+				</select>
+	<br>
+
+	<input type="submit" value="Register">
 </form>
 
 </body>
