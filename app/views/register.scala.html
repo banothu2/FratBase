@@ -2,24 +2,32 @@
 
 <!DOCTYPE html>
 <html>
-<body>
-<p>@message</p>
-<form action="/auth/register" method="POST">
-	First name: <input type="text" name="FirstName" value=""><br>
-	Last name:	<input type="text" name="LastName" value=""><br>
-	Username: 	<input type="text" name="username" value=""><br>
-	Password 	<input type="password" name="password" value=""><br>
-	University 	<select>
-					<option value="UIUC">University Of Illinois</option>
-				</select>
-	<br>
-	Greek		<select>
-					<option value="CS411">CS 411 Fraternity</option>
-				</select>
-	<br>
+	<head>
+	    <!-- Bootstrap core CSS -->
+	    <link href="/public/css/bootstrap.css" rel="stylesheet">
 
-	<input type="submit" value="Register">
-</form>
+	    <!-- Add custom CSS here -->
+	    <link href="/public/css/stylish-portfolio.css" rel="stylesheet">
+	    <link href="/public/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body>
+	<p>@message</p>
+	<form action="/auth/register" method="POST">
+		First name: <input type="text" name="FirstName" value=""><br>
+		Last name:	<input type="text" name="LastName" value=""><br>
+		Username: 	<input type="text" name="username" value=""><br>
+		Password 	<input type="password" name="password" value=""><br>
+		University 	<select>
+						<option value="UIUC">University Of Illinois</option>
+					</select>
+		<br>
+		Greek		<select>
+						<option value="CS411">CS 411 Fraternity</option>
+					</select>
+		<br>
 
-</body>
+		<input type="submit" value="Register">
+	</form>
+
+	</body>
 </html>
