@@ -3,8 +3,8 @@
 # ~~~~
 
 # Home page
-GET      /                           controllers.Application.index()
-#GET     /register                   controllers.Authentication.registerPageRender()
+GET     /                           controllers.Application.index()
+GET     /register                   controllers.Authentication.register()
 
 
 #GET     /LoggedIn                   controllers.Application.loggedIn()
@@ -13,6 +13,3 @@ GET      /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /public/*file               controllers.Assets.at(path="/public", file)
 
-
-# Post requests
-#POST    /auth/register              controllers.Authentication.registerUser()
