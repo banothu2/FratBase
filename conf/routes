@@ -14,3 +14,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /public/*file               controllers.Assets.at(path="/public", file)
 
 
+GET		/test/users					controllers.Test.users()
+GET		/test/create				controllers.Test.create()
+GET 	/test/login					controllers.Test.login()
+POST 	/test/login					controllers.Test.doLogin()
