@@ -15,7 +15,7 @@ public class Test extends Controller {
     public static Result users() {
         List<User> users = User.find.all();
 
-        return ok(users.get(3).username);
+        return ok("Added "+ users.size() +"th username: " + users.get(users.size()-1).username);
     }
     
     public static Result create(LoginModel data) {
@@ -30,9 +30,9 @@ public class Test extends Controller {
     	return ok("wuhi: " + user.id);
     }
     
-    public static Result login(){
+    /* public static Result login(){
     	return ok(views.html.login.render());
-    }
+    } */
     
     public static Result doLogin() {
     	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();

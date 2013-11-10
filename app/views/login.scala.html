@@ -1,19 +1,22 @@
+@(message: String)
 
 <!DOCTYPE html>
 <html>
 <body>
+<p>@message</p>
 <form action="" method="POST">
-	First name: <input type="text" name="FirstName" value=""><br>
-	Last name:	<input type="text" name="LastName" value=""><br>
+	First name: <input type="text" name="firstName" value=""><br>
+	Last name:	<input type="text" name="lastName" value=""><br>
 	Username: 	<input type="text" name="username" value=""><br>
-	E-mail		<input type="email" name="email" value=""><br>
 	Password 	<input type="password" name="password" value=""><br>
-	University 	<select>
+	University 	<select name="university">
 					<option value="UIUC">University Of Illinois</option>
+					<option value="NO">Dont Pick THIS</option>
 				</select>
 	<br>
-	Greek		<select>
+	Greek		<select name="greek">
 					<option value="CS411">CS 411 Fraternity</option>
+					<option value="NOPE">Dont pick this either</option>
 				</select>
 	<br>
 
@@ -22,4 +25,3 @@
 
 </body>
 </html>
-
