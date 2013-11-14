@@ -49,9 +49,9 @@ public class Test extends Controller {
         return ok(login.render("Hello"));
     }
 
-    public static Result doLogin(){
-        
-    }
+    /*public static Result doLogin(){
+
+    } */
     
 }
 
