@@ -32,9 +32,11 @@ public class Users extends Controller {
 	public static Result profileUpdate(){
 		if(Auth.isLoggedIn()){
 			ProfileUpdate data = new Form<ProfileUpdate>(ProfileUpdate.class).bindFromRequest().get();
+			User profileUser = Auth.getUser();
+			profileUser.name = data.name;
+			profileUser.email = data.email;
+			profileUser.save();
 
-			Auth.getUser().name = data.name;
-			Auth.getUser().email = data.email;
 			return redirect("/user/profile");
 
 		} else {
