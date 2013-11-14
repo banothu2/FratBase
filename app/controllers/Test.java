@@ -48,6 +48,10 @@ public class Test extends Controller {
     public static Result login(){
         return ok(login.render("Hello"));
     }
+
+    public static Result doLogin(){
+        
+    }
     
 }
 
