@@ -14,9 +14,11 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /public/*file               controllers.Assets.at(path="/public", file)
 
 
-GET		/test/users					controllers.Test.users()
-GET		/test/create				controllers.Test.create()
-# GET 	/test/login					controllers.Test.login()
-POST	/test/create				controllers.Test.doRegister()
-GET 	/test/login					controllers.Test.login()
-POST 	/test/login 				controllers.Test.doLogin()
+GET		/auth/users					controllers.Authentication.users()
+GET		/auth/create				controllers.Authentication.create()
+# GET 	/auth/login					controllers.Authentication.login()
+POST	/auth/create				controllers.Authentication.doRegister()
+GET 	/auth/login					controllers.Authentication.login()
+POST 	/auth/login 				controllers.Authentication.doLogin()
+
+#GET     /profile

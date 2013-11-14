@@ -12,7 +12,7 @@ import views.html.*;
 import views.html.helper.form;
 import play.data.*;
 
-public class Test extends Controller {
+public class Authentication extends Controller {
 
     public static Result users() {
         List<User> users = User.find.all();
@@ -56,7 +56,7 @@ public class Test extends Controller {
      	if (Auth.login(data.username, data.password)) {
      		return redirect("/");
      	} else {
-     		return ok(login.render(Auth.getUser().email));
+     		return ok(login.render("The entered username/password does not match."));
      	}
     }
 }

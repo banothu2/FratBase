@@ -12,7 +12,7 @@ public class Application extends Controller {
     	if(!Auth.isLoggedIn()){
         	return ok(index.render("Your."));
     	} else {
-        	return ok(index.render("Your new application is Ready."));
+        	return ok(index.render("Your new application is ."));
     	}
     }
 
