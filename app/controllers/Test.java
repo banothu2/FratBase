@@ -59,6 +59,16 @@ public class Test extends Controller {
      		return ok(login.render(Auth.getUser().email));
      	}
     }
+    
+    public static Result userList() {
+    	if (!Auth.isLoggedIn()) {
+    		return redirect("/auth/login");
+    	}
+    	
+    	List<User> users = User.find.all();
+
+    	return ok(views.html.users.render(users));
+    }
 }
 
 

@@ -22,3 +22,5 @@ GET 	/auth/login					controllers.Authentication.login()
 POST 	/auth/login 				controllers.Authentication.doLogin()
 
 #GET     /profile
+
+GET		/test/users					controllers.Test.userList()
