@@ -15,6 +15,8 @@ public class User extends Model {
 	public String username;
 	public String email;
 	public String passwordHash;
+	public String university;
+	public String greek;
 	
 	public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 	

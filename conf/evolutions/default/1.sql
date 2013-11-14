@@ -9,6 +9,8 @@ create table user (
   username                  varchar(255),
   email                     varchar(255),
   password_hash             varchar(255),
+  university                varchar(255),
+  greek                     varchar(255),
   constraint pk_user primary key (id))
 ;
 

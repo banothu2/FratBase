@@ -22,16 +22,18 @@ public class Authentication extends Controller {
 
 
     public static Result create(){
-        return ok(register.render("Hello"));
+        return ok(register.render("apple", "test"));
     }
 
     public static Result createUser(RegisterModel data) {
     	
     	User user = new User();
-    	user.name = data.firstName;
+    	user.name = data.firstName + " " + data.lastName;
     	user.username = data.username;
     	user.passwordHash = User.hash(data.password);
     	user.email = data.email;
+        user.university = data.university;
+        user.greek = data.greek;
     	user.save();
 
     	return ok("wuhi: " + user.id);
@@ -47,7 +49,12 @@ public class Authentication extends Controller {
 
     
     public static Result login(){
-        return ok(login.render("Hello"));
+        if(Auth.isLoggedIn()){
+            return redirect("/");
+
+        } else {
+            return ok(login.render("Hello"));
+        }
     }
 
     public static Result doLogin() {

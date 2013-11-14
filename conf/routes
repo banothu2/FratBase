@@ -15,10 +15,10 @@ GET     /public/*file               controllers.Assets.at(path="/public", file)
 
 
 GET		/auth/users					controllers.Authentication.users()
-GET		/auth/create				controllers.Authentication.create()
 # GET 	/auth/login					controllers.Authentication.login()
-POST	/auth/create				controllers.Authentication.doRegister()
+GET		/auth/register				controllers.Authentication.create()
+POST	/auth/register				controllers.Authentication.doRegister()
 GET 	/auth/login					controllers.Authentication.login()
 POST 	/auth/login 				controllers.Authentication.doLogin()
 
-#GET     /profile
+GET     /user/profile				controllers.Users.profile()
