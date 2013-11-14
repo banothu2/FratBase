@@ -1,0 +1,17 @@
+@(users: List[User])
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Username</th>
+		<th>E-mail</th>
+		
+	</tr>
+	@users.map { user =>
+		<tr>
+			<td>@user.name</td>
+			<td>@user.username</td>
+			<td>@user.email</td>
+		</tr>
+	}
+</table>
