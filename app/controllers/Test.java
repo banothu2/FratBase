@@ -6,6 +6,7 @@ import models.User;
 import play.*;
 import play.mvc.*;
 import viewmodels.*;
+import views.html.*;
 import views.html.loggedIn;
 import views.html.helper.form;
 import play.data.*;
@@ -17,8 +18,13 @@ public class Test extends Controller {
 
         return ok("Added "+ users.size() +"th username: " + users.get(users.size()-1).username);
     }
-    
-    public static Result create(LoginModel data) {
+
+
+    public static Result create(){
+        return ok(register.render("Hello"));
+    }
+
+    public static Result createUser(LoginModel data) {
     	
     	User user = new User();
     	user.name = data.firstName;
@@ -29,17 +35,20 @@ public class Test extends Controller {
 
     	return ok("wuhi: " + user.id);
     }
-    
-    /* public static Result login(){
-    	return ok(views.html.login.render());
-    } */
-    
-    public static Result doLogin() {
+
+    public static Result doRegister() {
     	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
-        return create(data);
-        //ok("Created user with email: " + data.email);
+        createUser(data);
+        return ok("Created user with email: " + data.email);
         //return ok(data.email +" "+ data.password + " "+ data.firstName + " "+ data.lastName + " "+ data.university + " "+ data.greek);
     }
+
+
+    
+    public static Result login(){
+        return ok(login.render("Hello"));
+    }
+    
 }
 
 
