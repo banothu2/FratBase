@@ -13,13 +13,13 @@
     <link href="/public/css/bootstrap.css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
-    <link href="/public/css/small-business.css" rel="stylesheet">
+    <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
 
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -28,30 +28,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-          <a class="navbar-brand logo-nav" href="index.html"><img src="http://placehold.it/150x40&text=Frat-Base"></a>
+          <a class="navbar-brand" href="/">Frat-Base</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <ul class="nav navbar-nav">
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/user/users">Members</a></li>
+            <li><a href="#contact">Feature</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav>
-
-    <div class="container">
+    <hr>
+    <div class="container" >
 
       <div class="row">
-        <div class="col-lg-3">
-          <h1>Business Name or Tagline</h1>
-          <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-          <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+        <div class="col-lg-3" style="padding-top: 65px">
+          <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a>
         </div>
         <div class="col-lg-4">
+
+          <div class="col-lg-12">
+            <h4 class="page-header">Your Profile</h4>
+          </div>
           <form role="form">
             <div class="form-group">
               <label for="exampleInputEmail1">Full Name</label>
@@ -69,9 +70,55 @@
               <label for="exampleInputEmail1">Greek Organization</label>
               <input type="test" class="form-control" id="firstName" name="firstName" value="@greek" disabled>
             </div>
-            <button type="submit" class="btn btn-default">Update</button>
+            <button type="submit" class="btn btn-default btn-block">Update</button>
           </form>
         </div>
+        <div class="col-lg-5">
+
+          <div class="row">
+          
+            <div class="col-lg-12">
+              <h4 class="page-header">Your Friends</h4>
+            </div>
+            
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
+            </div>
+          </div>          
+        </div><!-- /.container -->
 
       </div>
       
@@ -80,34 +127,17 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="well text-center">
-            This is a well that is a great spot for a business tagline or phone number for easy access!
+            More Features To Come! 
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>Heading 1</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sollicitudin auctor quam ac tempor. Cras a ante sed libero mollis sodales. Praesent fringilla, neque ut ultrices faucibus, dolor eros ultrices neque, nec bibendum arcu ipsum eget justo.</p>
-          <a class="btn btn-default" href="#">More Info</a>
-        </div>
-        <div class="col-lg-4">
-          <h2>Heading 2</h2>
-          <p>Phasellus vestibulum sagittis purus laoreet varius. Pellentesque malesuada malesuada mattis. Aliquam sed porta nisi, eget suscipit dolor. Nam ipsum sapien, rhoncus eu leo eu, ultricies pellentesque tellus.</p>
-          <a class="btn btn-default" href="#">More Info</a>
-        </div>
-        <div class="col-lg-4">
-          <h2>Heading 3</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sollicitudin auctor quam ac tempor. Cras a ante sed libero mollis sodales. Praesent fringilla, neque ut ultrices faucibus, dolor eros ultrices neque, nec bibendum arcu ipsum eget justo.</p>
-          <a class="btn btn-default" href="#">More Info</a>
-        </div>
-      </div>
       
       <footer>
         <hr>
         <div class="row">
           <div class="col-lg-12">
-            <p>Copyright &copy; Company 2013 &middot; Facebook &middot; Twitter &middot; Google+</p>
+            <p>Copyright &copy; FratBase 2013 &middot; Facebook &middot; Twitter &middot; Google+</p>
           </div>
         </div>
       </footer>

@@ -5,6 +5,7 @@ import java.util.List;
 import auth.Auth;
 
 import models.User;
+
 import play.*;
 import play.mvc.*;
 import viewmodels.*;
@@ -27,6 +28,18 @@ public class Users extends Controller {
 		} else {
         	return redirect("/");
     	}	
+	}
+	public static Result profileUpdate(){
+		if(Auth.isLoggedIn()){
+			ProfileUpdate data = new Form<ProfileUpdate>(ProfileUpdate.class).bindFromRequest().get();
+
+			Auth.getUser().name = data.name;
+			Auth.getUser().email = data.email;
+			return redirect("/user/profile");
+
+		} else {
+			return redirect("/");
+		}
 	}
 
 }

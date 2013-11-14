@@ -42,7 +42,8 @@ public class Authentication extends Controller {
     public static Result doRegister() {
     	RegisterModel data = new Form<RegisterModel>(RegisterModel.class).bindFromRequest().get();
         createUser(data);
-        return ok("Created user with email: " + data.email);
+        return redirect("/auth/login");
+        //return ok("Created user with email: " + data.email);
         //return ok(data.email +" "+ data.password + " "+ data.firstName + " "+ data.lastName + " "+ data.university + " "+ data.greek);
     }
 
@@ -65,6 +66,16 @@ public class Authentication extends Controller {
      	} else {
      		return ok(login.render("The entered username/password does not match."));
      	}
+    }
+
+    public static Result userList() {
+            if (!Auth.isLoggedIn()) {
+                    return redirect("/auth/login");
+            }
+            
+            List<User> users = User.find.all();
+
+            return ok(views.html.users.render(users));
     }
 }
 
