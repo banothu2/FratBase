@@ -11,7 +11,7 @@ public class Auth {
 			return false;
 		}
 		
-		if (user.passwordHash != User.hash(password)) {
+		if (!user.passwordHash.equals(User.hash(password))) {
 			return false;
 		}
 		

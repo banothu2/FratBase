@@ -2,12 +2,13 @@ package controllers;
 
 import java.util.List;
 
+import auth.Auth;
+
 import models.User;
 import play.*;
 import play.mvc.*;
 import viewmodels.*;
 import views.html.*;
-import views.html.loggedIn;
 import views.html.helper.form;
 import play.data.*;
 
@@ -24,7 +25,7 @@ public class Test extends Controller {
         return ok(register.render("Hello"));
     }
 
-    public static Result createUser(LoginModel data) {
+    public static Result createUser(RegisterModel data) {
     	
     	User user = new User();
     	user.name = data.firstName;
@@ -37,7 +38,7 @@ public class Test extends Controller {
     }
 
     public static Result doRegister() {
-    	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
+    	RegisterModel data = new Form<RegisterModel>(RegisterModel.class).bindFromRequest().get();
         createUser(data);
         return ok("Created user with email: " + data.email);
         //return ok(data.email +" "+ data.password + " "+ data.firstName + " "+ data.lastName + " "+ data.university + " "+ data.greek);
@@ -49,10 +50,15 @@ public class Test extends Controller {
         return ok(login.render("Hello"));
     }
 
-    /*public static Result doLogin(){
-
-    } */
-    
+    public static Result doLogin() {
+    	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
+    	
+     	if (Auth.login(data.username, data.password)) {
+     		return redirect("/");
+     	} else {
+     		return ok(login.render("The entered username/password does not match."));
+     	}
+    }
 }
 
 
