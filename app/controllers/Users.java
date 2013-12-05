@@ -5,7 +5,6 @@ import java.util.List;
 import auth.Auth;
 
 import models.User;
-
 import play.*;
 import play.mvc.*;
 import viewmodels.*;
@@ -17,6 +16,9 @@ public class Users extends Controller {
 	
 	public static Result profile(){
 		if(Auth.isLoggedIn()){
+
+        	List<User> users = User.find.all();
+
 			return ok(profile.render(
 						Auth.getUser().firstName,
 						Auth.getUser().lastName,
@@ -24,7 +26,9 @@ public class Users extends Controller {
 						Auth.getUser().university,
 						Auth.getUser().greekOrganization,
 						Auth.getUser().facebookId,
-						Auth.getUser().sex
+						Auth.getUser().sex,
+						Auth.getUser().accessLevel, 
+						users
 					)
 				);
 

@@ -19,7 +19,7 @@ public class RegisterModel {
 	public String linkedIn;
 	public String resume; 
 	public String status; 
-	public boolean adminStatus;
+	public int accessLevel;
 	public boolean relationshipStatus;
 	public String major; 
 	

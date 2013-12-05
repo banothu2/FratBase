@@ -1,4 +1,5 @@
-@(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)
+@(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +16,18 @@
     <!-- Add custom CSS here -->
     <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <style type="text/css"> 
+      imageHover {
+          display: none;
+          height:30px;
+          text-align: center;
+          margin-left:0px;
+      }
+      a:hover + imageHover {
+        display: block;
+      }​
+
+    </style>
   </head>
 
   <body>
@@ -86,8 +99,7 @@
           //console.log(response.id + " " 
                     //+ response.link + " " 
                     //+ response.gender + " ");
-
-          if(@facebookId == null){
+          @if(facebookId == null) {
               $.post("/api/facebookConnect", {
                 id: response.id,
                 gender: response.gender
@@ -120,7 +132,9 @@
           <ul class="nav navbar-nav">
             <li><a href="/user/dashboard">Dashboard</a></li>
             <li><a href="/user/users">Members</a></li>
-            <li><a href="#contact">Feature</a></li>
+            @if(accessLevel == 1){
+              <li><a href="/auth/register">Add Members</a></li>
+            }
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -133,7 +147,6 @@
           
           <!-- <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a> -->
                     
-
           @if(facebookId == null) {
             <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a>
           } else {
@@ -143,17 +156,22 @@
           @if(facebookId == null) {
             <button type="button" class="btn btn-success btn-block" onclick="FB.login()">Link your facebook account!</button>
           }
+          <div class="alert alert-info">Hi @firstName, you are an admin!</div>
 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
 
           <div class="col-lg-12">
             <h4 class="page-header">Your Profile</h4>
           </div>
           <form role="form" method="POST">
             <div class="form-group">
-              <label for="exampleInputEmail1">Full Name</label>
-              <input type="test" class="form-control" id="firstName" name="name" value="@firstName @lastName">
+              <label for="exampleInputEmail1">First Name</label>
+              <input type="test" class="form-control" id="firstName" name="firstName" value="@firstName">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Last Name</label>
+              <input type="test" class="form-control" id="lastName" name="lastName" value="@lastName">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email</label>
@@ -170,7 +188,7 @@
             <button type="submit" class="btn btn-default btn-block">Update</button>
           </form>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-3">
 
           <div class="row">
           
@@ -178,42 +196,22 @@
               <h4 class="page-header">Your Friends</h4>
             </div>
             
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#"><img class="img-responsive" src="http://placehold.it/400x300"></a>
-            </div>
+
+            @users.map{ user=>
+              @if(user.facebookId != facebookId){
+                <div class="col-lg-4 col-md-4 col-xs-6 thumb">
+                  @if(user.facebookId == null) {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
+                    <imageHover>@user.firstName @user.lastName</imageHover>
+                  } else {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=200&height=250" title="@user.firstName @user.lastName"></a>
+                    <imageHover> @user.firstName @user.lastName </imageHover>
+                  }
+                
+                </div>
+              }
+            }
+
           </div>          
         </div><!-- /.container -->
 

@@ -42,7 +42,7 @@ create table user (
   linked_in                 varchar(255),
   resume                    varchar(255),
   status                    varchar(255),
-  admin_status              tinyint(1) default 0,
+  access_level              integer,
   relationship_status       tinyint(1) default 0,
   major                     varchar(255),
   constraint pk_user primary key (id))

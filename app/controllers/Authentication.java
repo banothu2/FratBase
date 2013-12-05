@@ -44,7 +44,7 @@ public class Authentication extends Controller {
         // user.linkedIn = data.linkedIn;
         // user.resume = data.resume;
         // user.status = data.status;
-        // user.adminStatus = data.adminStatus;
+        user.accessLevel = data.accessLevel;
         // user.relationshipStatus = data.relationshipStatus;
         // user.major = data.major; 
 
