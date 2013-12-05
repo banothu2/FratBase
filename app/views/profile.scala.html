@@ -16,18 +16,6 @@
     <!-- Add custom CSS here -->
     <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <style type="text/css"> 
-      imageHover {
-          display: none;
-          height:30px;
-          text-align: center;
-          margin-left:0px;
-      }
-      a:hover + imageHover {
-        display: block;
-      }​
-
-    </style>
   </head>
 
   <body>
@@ -155,8 +143,11 @@
 
           @if(facebookId == null) {
             <button type="button" class="btn btn-success btn-block" onclick="FB.login()">Link your facebook account!</button>
+          } 
+          @if(accessLevel == 1){
+            <div class="alert alert-info">Hi @firstName, you are an admin!</div>
           }
-          <div class="alert alert-info">Hi @firstName, you are an admin!</div>
+          
 
         </div>
         <div class="col-lg-6">
@@ -198,16 +189,14 @@
             
 
             @users.map{ user=>
-              @if(user.facebookId != facebookId){
+              @if((user.facebookId != facebookId) || (facebookId == null)){
                 <div class="col-lg-4 col-md-4 col-xs-6 thumb">
                   @if(user.facebookId == null) {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
-                    <imageHover>@user.firstName @user.lastName</imageHover>
                   } else {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=200&height=250" title="@user.firstName @user.lastName"></a>
-                    <imageHover> @user.firstName @user.lastName </imageHover>
                   }
-                
+
                 </div>
               }
             }
