@@ -16,6 +16,7 @@ public class Api extends Controller {
 
     public static Result addFacebookData() {
         FacebookDataModel data = new Form<FacebookDataModel>(FacebookDataModel.class).bindFromRequest().get();
+        // Query database to see if id already exists
         User facebookUser = Auth.getUser();
         facebookUser.sex = data.gender;
         facebookUser.facebookId = data.id;
