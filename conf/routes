@@ -24,3 +24,6 @@ GET     /user/profile 				controllers.Users.profile()
 POST    /user/profile				controllers.Users.profileUpdate()
 
 GET     /user/users                 controllers.Authentication.userList()
+
+# POST requests to add data 
+POST    /api/facebookConnect        controllers.Api.addFacebookData()

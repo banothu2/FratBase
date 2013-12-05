@@ -18,10 +18,13 @@ public class Users extends Controller {
 	public static Result profile(){
 		if(Auth.isLoggedIn()){
 			return ok(profile.render(
-						Auth.getUser().name,
+						Auth.getUser().firstName,
+						Auth.getUser().lastName,
 						Auth.getUser().email,
 						Auth.getUser().university,
-						Auth.getUser().greek
+						Auth.getUser().greekOrganization,
+						Auth.getUser().facebookId,
+						Auth.getUser().sex
 					)
 				);
 
@@ -33,7 +36,8 @@ public class Users extends Controller {
 		if(Auth.isLoggedIn()){
 			ProfileUpdate data = new Form<ProfileUpdate>(ProfileUpdate.class).bindFromRequest().get();
 			User profileUser = Auth.getUser();
-			profileUser.name = data.name;
+			profileUser.firstName = data.firstName;
+			profileUser.lastName = data.lastName;
 			profileUser.email = data.email;
 			profileUser.save();
 

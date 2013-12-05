@@ -56,8 +56,13 @@
 
       @users.map{ user=>
         <div class="col-md-2 portfolio-item">
-          <a href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg"></a>
-          <h3><a>@user.name</a></h3>
+
+          @if(user.facebookId == null) {
+            <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg"></a>
+          } else {
+            <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=400&height=500"></a>
+          }
+          <h3><a>@user.firstName @user.lastName</a></h3>
           <h5><p>Username: @user.username</p></h5>     
           <h5><p>@user.email</p></h5>     
         </div>

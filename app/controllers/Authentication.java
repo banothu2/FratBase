@@ -20,7 +20,6 @@ public class Authentication extends Controller {
         return ok("Added "+ users.size() +"th username: " + users.get(users.size()-1).username);
     }
 
-
     public static Result create(){
         return ok(register.render("apple", "test"));
     }
@@ -28,12 +27,27 @@ public class Authentication extends Controller {
     public static Result createUser(RegisterModel data) {
     	
     	User user = new User();
-    	user.name = data.firstName + " " + data.lastName;
+    	user.firstName = data.firstName;
+        user.lastName = data.lastName;
     	user.username = data.username;
     	user.passwordHash = User.hash(data.password);
     	user.email = data.email;
+        // user.age = data.age;
+        // user.sex = data.sex;
+        // user.graduationDate = data.graduationDate;
         user.university = data.university;
-        user.greek = data.greek;
+        user.greekOrganization = data.greekOrganization;
+        // user.greekName = data.greekName;
+        // user.profilePicture = data.profilePicture;
+        // user.facebookId = data.facebookId;
+        // user.phoneNumber = data.phoneNumber; 
+        // user.linkedIn = data.linkedIn;
+        // user.resume = data.resume;
+        // user.status = data.status;
+        // user.adminStatus = data.adminStatus;
+        // user.relationshipStatus = data.relationshipStatus;
+        // user.major = data.major; 
+
     	user.save();
 
     	return ok("wuhi: " + user.id);
@@ -51,7 +65,7 @@ public class Authentication extends Controller {
     
     public static Result login(){
         if(Auth.isLoggedIn()){
-            return redirect("/");
+            return redirect("/user/profile");
 
         } else {
             return ok(login.render("Hello"));
@@ -62,7 +76,7 @@ public class Authentication extends Controller {
     	LoginModel data = new Form<LoginModel>(LoginModel.class).bindFromRequest().get();
     	
      	if (Auth.login(data.username, data.password)) {
-     		return redirect("/");
+     		return redirect("/user/profile");
      	} else {
      		return ok(login.render("The entered username/password does not match."));
      	}

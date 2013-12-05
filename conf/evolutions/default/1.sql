@@ -3,14 +3,48 @@
 
 # --- !Ups
 
+create table address (
+  id                        integer auto_increment not null,
+  user_id                   varchar(255),
+  address_line_one          varchar(255),
+  address_line_two          varchar(255),
+  city                      varchar(255),
+  state                     varchar(255),
+  zip                       varchar(255),
+  country                   varchar(255),
+  address_type              varchar(255),
+  constraint pk_address primary key (id))
+;
+
+create table greek (
+  id                        integer auto_increment not null,
+  greek_name                varchar(255),
+  university                varchar(255),
+  constraint pk_greek primary key (id))
+;
+
 create table user (
   id                        integer auto_increment not null,
-  name                      varchar(255),
+  first_name                varchar(255),
+  last_name                 varchar(255),
   username                  varchar(255),
-  email                     varchar(255),
   password_hash             varchar(255),
+  email                     varchar(255),
+  age                       integer,
+  sex                       varchar(255),
+  graduation_date           varchar(255),
   university                varchar(255),
-  greek                     varchar(255),
+  greek_organization        varchar(255),
+  greek_name                varchar(255),
+  profile_picture           varchar(255),
+  facebook_id               varchar(255),
+  phone_number              varchar(255),
+  linked_in                 varchar(255),
+  resume                    varchar(255),
+  status                    varchar(255),
+  admin_status              tinyint(1) default 0,
+  relationship_status       tinyint(1) default 0,
+  major                     varchar(255),
   constraint pk_user primary key (id))
 ;
 
@@ -20,6 +54,10 @@ create table user (
 # --- !Downs
 
 SET FOREIGN_KEY_CHECKS=0;
+
+drop table address;
+
+drop table greek;
 
 drop table user;
 

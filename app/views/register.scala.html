@@ -35,20 +35,19 @@
       <form action="" method="POST" class="form-signin">
         <h2 class="form-signin-heading">Please Register</h2>
         
-		<input type="text" class="form-control" placeholder="First Name" name="firstName" required autofocus>
-		<input type="text" class="form-control" placeholder="Last Name" name="lastName" required autofocus>
-		<input type="text" class="form-control" placeholder="Email" name="email" required autofocus>
+    		<input type="text" class="form-control" placeholder="First Name" name="firstName" required autofocus>
+    		<input type="text" class="form-control" placeholder="Last Name" name="lastName" required autofocus>
+    		<input type="text" class="form-control" placeholder="Email" name="email" required autofocus>
         <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
         <input type="password" class="form-control" placeholder="Password" name="password" required>
         <select name="university" class="input-lg btn-block">
-			<option value="UIUC"> University of Illinois</option>
-			<option value="No"> Don't Pick This </option>
-		</select>
-        <select name="greek" class="input-lg btn-block">
-			<option value="CS411"> CS 411 Fraternity</option>
-			<option value="No"> Don't Pick This </option>
-		</select>       			
-
+			    <option value="University of Illinois"> University of Illinois</option>
+			    <option value="Stanford University"> Stanford University </option>
+		    </select>
+        <select name="greekOrganization" class="input-lg btn-block">
+			    <option value="Alpha Beta"> Alpha Beta Fraternity</option>
+			    <option value="Gamma Delta"> Gamma Delta Fraternity </option>
+		    </select>       			
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         <button class="btn btn-lg btn-success btn-block" type="button" onclick="window.location='/auth/login';">Existing User? Login Here!</button>
 
