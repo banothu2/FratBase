@@ -11,7 +11,10 @@ import play.data.validation.*;
 public class Address extends Model {
 	@Id
 	public int id;
-	public String userId;
+	public int userId;
+	public String firstName; 
+	public String lastName; 
+	public String facebookId;
 	public String addressLineOne; 
 	public String addressLineTwo;
 	public String city;

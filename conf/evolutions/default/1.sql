@@ -5,7 +5,10 @@
 
 create table address (
   id                        integer auto_increment not null,
-  user_id                   varchar(255),
+  user_id                   integer,
+  first_name                varchar(255),
+  last_name                 varchar(255),
+  facebook_id               varchar(255),
   address_line_one          varchar(255),
   address_line_two          varchar(255),
   city                      varchar(255),

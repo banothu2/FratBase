@@ -1,4 +1,4 @@
-@(id: Integer)(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])
+@(id: Integer)(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])(address: Address)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,20 +35,6 @@
       // whenever someone who was previously logged out tries to log in again, the correct case below 
       // will be handled. 
 
-      // var access_token;
-      // access_token =   FB.getAuthResponse()['accessToken'];
-
-      /*function getFriends(){
-        FB.api(
-           {
-             method: 'fql.query',
-             query: 'SELECT uid,first_name,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
-             access_token: access_token
-           },function(response){
-          console.log(response);
-        });
-      } */
-
       FB.Event.subscribe('auth.authResponseChange', function(response) {
         // Here we specify what we do with the response anytime this event occurs. 
         if (response.status === 'connected') {
@@ -56,7 +42,6 @@
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
           testAPI();
-          getFriends();
         } else if (response.status === 'not_authorized') {
           // In this case, the person is logged into Facebook, but not into the app, so we call
           // FB.login() to prompt them to do so. 
@@ -65,7 +50,6 @@
           // (1) JavaScript created popup windows are blocked by most browsers unless they 
           // result from direct interaction from people using the app (such as a mouse click)
           // (2) it is a bad experience to be continually prompted to login upon page load.
-          console.log("butter");
           testAPI();
           //FB.login();
         } else {
@@ -164,12 +148,12 @@
           
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
 
           <div class="col-lg-12">
             <h4 class="page-header">Your Profile</h4>
           </div>
-          <form role="form" method="POST">
+          <form role="form" action="/user/profile" method="POST">
             <div class="form-group">
               <label for="exampleInputEmail1">First Name</label>
               <input type="test" class="form-control" id="firstName" name="firstName" value="@firstName">
@@ -193,7 +177,117 @@
             <button type="submit" class="btn btn-default btn-block">Update</button>
           </form>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <h4 class="page-header">Your address</h4>
+            </div>        
+
+              @if(address == null) {
+                <form class="form-horizontal" role="form" action="/user/profile/addAddress" method="POST">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address 1</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="addressLineOne" name="addressLineOne" placeholder="608 E Chalmers" >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address 2</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="addressLineTwo" name="addressLineTwo" placeholder="Apt 105">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="city" name="city" placeholder="Champaign">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="state" name="state" placeholder="Illinois">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Zip</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="zip" name="zip" placeholder="61820">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address Type</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" name="addressType">
+                        <option value="Dorm">Dorm</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Home">Home</option>
+                        <option value="Work">Work</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-default btn-block">Add</button>
+
+                </form>
+
+              } else {
+
+                <form class="form-horizontal" role="form" action="/user/profile/updateAddress" method="POST">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address 1</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="addressLineOne" name="addressLineOne" placeholder="608 E Chalmers" value="@address.addressLineOne">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address 2</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="addressLineTwo" name="addressLineTwo" placeholder="Apt 105" value="@address.addressLineTwo">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="city" name="city" placeholder="Champaign" value="@address.city">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="state" name="state" placeholder="Illinois" value="@address.state">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Zip</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="zip" name="zip" placeholder="61820" value="@address.zip">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Address Type</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" name="addressType">
+                        <option value="@address.addressType">@address.addressType</option>
+                        <option value="Dorm">Dorm</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Home">Home</option>
+                        <option value="Work">Work</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-default btn-block">Update</button>
+                  
+                </form>
+
+              }
+
+
+          </div>  
 
           <div class="row">
           
@@ -204,7 +298,7 @@
 
             @users.map{ user=>
               @if(((user.facebookId != facebookId) || (facebookId == null)) && id != user.id){
-                <div class="col-lg-4 col-md-4 col-xs-6 thumb">
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                   @if(user.facebookId == null) {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
                   } else {
@@ -215,7 +309,8 @@
               }
             }
 
-          </div>          
+          </div>      
+
         </div><!-- /.container -->
 
       </div>
@@ -227,11 +322,6 @@
           <div class="well text-center">
             More Features To Come! 
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <button type="button" onclick="window.fbAsyncInit.getFriends()">Click Here</button>
         </div>
       </div>
       
