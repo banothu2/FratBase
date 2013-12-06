@@ -20,6 +20,7 @@ public class Users extends Controller {
         	List<User> users = User.find.all();
 
 			return ok(profile.render(
+						Auth.getUser().id,
 						Auth.getUser().firstName,
 						Auth.getUser().lastName,
 						Auth.getUser().email,

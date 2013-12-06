@@ -1,0 +1,88 @@
+@(message: String)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Small Business Template with Logo for Bootstrap 3</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '540156266075587', // App ID
+        channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+
+
+      function getFriends(){
+        FB.api(
+           {
+             method: 'fql.query',
+             query: 'SELECT uid,first_name,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
+             access_token: access_token
+           },function(response){
+           		for(var i = 0; i < response.length; i++){
+           			$("ol").append("<li>"+"<img src='"+response[i].pic+"' alt='ummm'/>"+response[i].first_name+"</li>");
+           		}
+
+          console.log(response);
+        });
+      }
+
+      var access_token;
+
+
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+        // Here we specify what we do with the response anytime this event occurs. 
+        if (response.status === 'connected') {
+          // The response object is returned with a status field that lets the app know the current
+          // login status of the person. In this case, we're handling the situation where they 
+          // have logged in to the app.
+          access_token =   FB.getAuthResponse()['accessToken'];
+          console.log(access_token);
+          getFriends();
+        } 
+      }); 
+      }; 
+
+      // Load the SDK asynchronously
+      (function(d){
+       var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       ref.parentNode.insertBefore(js, ref);
+      }(document));
+    </script>
+
+    <div>
+    	<button type="button" onclick="FB.login();">Click me to generate Graph</button>
+    </div>
+    <div> 
+    	<h3> Friends also using app </h3>
+    	<ol>
+		</ol>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/js/bootstrap.js"></script>
+  </body>
+</html>

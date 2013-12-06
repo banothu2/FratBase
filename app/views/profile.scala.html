@@ -1,4 +1,4 @@
-@(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])
+@(id: Integer)(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,14 +35,28 @@
       // whenever someone who was previously logged out tries to log in again, the correct case below 
       // will be handled. 
 
+      // var access_token;
+      // access_token =   FB.getAuthResponse()['accessToken'];
+
+      /*function getFriends(){
+        FB.api(
+           {
+             method: 'fql.query',
+             query: 'SELECT uid,first_name,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
+             access_token: access_token
+           },function(response){
+          console.log(response);
+        });
+      } */
+
       FB.Event.subscribe('auth.authResponseChange', function(response) {
         // Here we specify what we do with the response anytime this event occurs. 
         if (response.status === 'connected') {
           // The response object is returned with a status field that lets the app know the current
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
-
           testAPI();
+          getFriends();
         } else if (response.status === 'not_authorized') {
           // In this case, the person is logged into Facebook, but not into the app, so we call
           // FB.login() to prompt them to do so. 
@@ -189,7 +203,7 @@
             
 
             @users.map{ user=>
-              @if((user.facebookId != facebookId) || (facebookId == null)){
+              @if(((user.facebookId != facebookId) || (facebookId == null)) && id != user.id){
                 <div class="col-lg-4 col-md-4 col-xs-6 thumb">
                   @if(user.facebookId == null) {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
@@ -215,7 +229,11 @@
           </div>
         </div>
       </div>
-
+      <div class="row">
+        <div class="col-lg-12">
+          <button type="button" onclick="window.fbAsyncInit.getFriends()">Click Here</button>
+        </div>
+      </div>
       
       <footer>
         <hr>

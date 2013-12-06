@@ -26,6 +26,7 @@ POST    /user/profile				controllers.Users.profileUpdate()
 #GET   /clients              controllers.Clients.list(page: Integer ?= 1)
 
 GET     /user/users                 controllers.Authentication.userList()
+GET     /test						controllers.Application.test()
 
 # POST requests to add data 
 POST    /api/facebookConnect        controllers.Api.addFacebookData()
