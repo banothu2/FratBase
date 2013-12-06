@@ -25,11 +25,12 @@ POST    /user/profile				controllers.Users.profileUpdate()
 POST    /user/profile/addAddress	controllers.Users.addAddress()
 POST    /user/profile/updateAddress controllers.Users.updateAddress()
 
-#GET   /clients              controllers.Clients.list(page: Integer ?= 1)
+#GET    /clients                    controllers.Clients.list(page: Integer ?= 1)
 
 GET     /user/users                 controllers.Authentication.userList()
 GET     /test						controllers.Application.test()
 
+GET     /profile/:username			controllers.Users.getProfile(username: String)
 
 # POST requests to add data 
 POST    /api/facebookConnect        controllers.Api.addFacebookData()

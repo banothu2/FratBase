@@ -123,4 +123,17 @@ public class Users extends Controller {
 			return redirect("/");
 		}
 	}
+
+	public static Result getProfile(String username){
+		if(Auth.isLoggedIn()){
+			User viewUser = User.find
+								.where()
+								.eq("username", username)
+								.findUnique();
+
+			return ok(getProfile.render(viewUser));
+		} else {
+			return redirect("/");
+		}
+	}
 }
