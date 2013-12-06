@@ -23,6 +23,8 @@ POST 	/auth/login 				controllers.Authentication.doLogin()
 GET     /user/profile 				controllers.Users.profile()
 POST    /user/profile				controllers.Users.profileUpdate()
 
+#GET   /clients              controllers.Clients.list(page: Integer ?= 1)
+
 GET     /user/users                 controllers.Authentication.userList()
 
 # POST requests to add data 
