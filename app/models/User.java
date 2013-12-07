@@ -16,21 +16,23 @@ public class User extends Model {
 	public String username;
 	public String passwordHash;
 	public String email;
+	public String university;
+	public String greekOrganization;
+	
 	public int age; 
 	public String sex;
 	public String graduationDate; 
-	public String university;
-	public String greekOrganization;
+	public String major;
+	public String phoneNumber; 
+	public String linkedIn;
+	public boolean relationshipStatus; 
+	
 	public String greekName;
 	public String profilePicture; 
 	public String facebookId;
-	public String phoneNumber; 
-	public String linkedIn;
 	public String resume; 
 	public String status; 
 	public int accessLevel;
-	public boolean relationshipStatus;
-	public String major; 
 	
 	public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 	

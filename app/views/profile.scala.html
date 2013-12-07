@@ -1,7 +1,8 @@
-@(id: Integer)(firstName: String)(lastName: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])(address: Address)
+@(id: Integer)(firstName: String)(lastName: String)(major: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(sex: String)(accessLevel: Int)(users: List[User])(address: Address)
 
 <!DOCTYPE html>
 <html lang="en">
+<!--(age: String)(sex: String)(graduationDate: String)(major: String)-->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -173,6 +174,10 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Greek Organization</label>
               <input type="text" class="form-control" id="firstName" name="greek" value="@greekOrganization" disabled>
+            </div>
+			<div class="form-group">
+              <label for="exampleInputEmail1">Major</label>
+              <input type="text" class="form-control" id="firstName" name="greek" value="@major" disabled>
             </div>
             <button type="submit" class="btn btn-default btn-block">Update</button>
           </form>
