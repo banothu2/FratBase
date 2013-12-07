@@ -26,6 +26,19 @@ create table greek (
   constraint pk_greek primary key (id))
 ;
 
+create table service_log (
+  id                        integer auto_increment not null,
+  user_id                   varchar(255),
+  university                varchar(255),
+  greek_organization        varchar(255),
+  type                      varchar(255),
+  date                      varchar(255),
+  hours                     varchar(255),
+  minutes                   varchar(255),
+  comments                  varchar(255),
+  constraint pk_service_log primary key (id))
+;
+
 create table user (
   id                        integer auto_increment not null,
   first_name                varchar(255),
@@ -61,6 +74,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table address;
 
 drop table greek;
+
+drop table service_log;
 
 drop table user;
 

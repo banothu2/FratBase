@@ -57,7 +57,9 @@ public class Users extends Controller {
 	public static Result profileUpdate(){
 		if(Auth.isLoggedIn()){
 			ProfileUpdate data = new Form<ProfileUpdate>(ProfileUpdate.class).bindFromRequest().get();
+
 			User profileUser = Auth.getUser();
+			
 			profileUser.firstName = data.firstName;
 			profileUser.lastName = data.lastName;
 			profileUser.email = data.email;
