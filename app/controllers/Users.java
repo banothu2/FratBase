@@ -48,7 +48,6 @@ public class Users extends Controller {
 						Auth.getUser().accessLevel, 
 						users,
 						address
-						
 					)
 				);
 
