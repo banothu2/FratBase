@@ -157,6 +157,7 @@ public class Users extends Controller {
 	public static Result serviceLog(){
 		if(Auth.isLoggedIn()){
 			List<ServiceLog> serviceLogData = ServiceLog.find.all();
+			
 
 			List<User> allAssociatedUsers = User.find
 			        						.where()
