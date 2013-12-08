@@ -14,11 +14,11 @@ public class ServiceLog extends Model {
 	public String userId;
 	public String university;
 	public String greekOrganization;
-	public String type;
+	public String serviceType;
 	public String date;
 	public String hours;
 	public String minutes;
-	public String comments; 
+	public String comments;
 	
 	public static Finder<Long, ServiceLog> find = new Finder<Long, ServiceLog>(Long.class, ServiceLog.class);
 	

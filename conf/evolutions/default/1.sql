@@ -31,7 +31,7 @@ create table service_log (
   user_id                   varchar(255),
   university                varchar(255),
   greek_organization        varchar(255),
-  type                      varchar(255),
+  service_type              varchar(255),
   date                      varchar(255),
   hours                     varchar(255),
   minutes                   varchar(255),

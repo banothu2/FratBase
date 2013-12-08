@@ -24,6 +24,7 @@ GET     /user/profile 				controllers.Users.profile()
 POST    /user/profile				controllers.Users.profileUpdate()
 POST    /user/profile/addAddress	controllers.Users.addAddress()
 POST    /user/profile/updateAddress controllers.Users.updateAddress()
+GET     /user/servicelog            controllers.Users.serviceLog()
 
 #GET    /clients                    controllers.Clients.list(page: Integer ?= 1)
 

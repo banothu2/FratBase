@@ -7,6 +7,8 @@ import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 
+import models.ServiceLog;
+
 @Entity
 public class User extends Model {
 	@Id
@@ -33,6 +35,8 @@ public class User extends Model {
 	public String resume; 
 	public String status; 
 	public int accessLevel;
+	
+	public ServiceLog serviceLog;
 	
 	public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 	

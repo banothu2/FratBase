@@ -6,6 +6,7 @@ import auth.Auth;
 
 import models.User;
 import models.Address;
+import models.ServiceLog;
 
 import play.*;
 import play.mvc.*;
@@ -151,5 +152,26 @@ public class Users extends Controller {
 		} else {
 			return redirect("/");
 		}
+	}
+	
+	public static Result serviceLog(){
+		if(Auth.isLoggedIn()){
+			return ok(servicelog.render(
+						Auth.getUser().serviceLog.id,
+						Auth.getUser().serviceLog.userId,
+						Auth.getUser().serviceLog.university,
+						Auth.getUser().serviceLog.greekOrganization,
+						Auth.getUser().serviceLog.serviceType,
+						Auth.getUser().serviceLog.date,
+						Auth.getUser().serviceLog.hours,
+						Auth.getUser().serviceLog.minutes,
+						Auth.getUser().serviceLog.comments,
+						Auth.getUser().accessLevel
+					)
+				);
+
+		} else {
+        	return redirect("/");
+    	}	
 	}
 }
