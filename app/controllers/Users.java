@@ -64,6 +64,7 @@ public class Users extends Controller {
 			profileUser.firstName = data.firstName;
 			profileUser.lastName = data.lastName;
 			profileUser.email = data.email;
+			profileUser.major = data.major;
 			profileUser.save();
 
 			return redirect("/user/profile");
