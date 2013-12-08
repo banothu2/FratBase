@@ -1,5 +1,4 @@
-@(id: Int)(userId: String)(university: String)(greekOrganization: String)(serviceType: String)(date: String)(hours: String)(minutes: String)(comments: String)(accessLevel: Int)
-
+@(serviceLogData: List[ServiceLog])(accessLevel: Int)(greekOrganization: String)(university: String)(associatedUsers: List[User])
 <!DOCTYPE html>
 <html lang="en">
 <!--(age: String)(sex: String)(graduationDate: String)(major: String)-->
@@ -17,6 +16,54 @@
     <!-- Add custom CSS here -->
     <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          var activeSystemClass = $('.list-group-item.active');
+
+          //something is entered in search form
+          $('#system-search').keyup( function() {
+             var that = this;
+              // affect all table rows on in systems table
+              var tableBody = $('.table-list-search tbody');
+              var tableRowsClass = $('.table-list-search tbody tr');
+              $('.search-sf').remove();
+              tableRowsClass.each( function(i, val) {
+              
+                  //Lower text for case insensitive
+                  var rowText = $(val).text().toLowerCase();
+                  var inputText = $(that).val().toLowerCase();
+                  if(inputText != '')
+                  {
+                      $('.search-query-sf').remove();
+                      tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong>Searching for: "'
+                          + $(that).val()
+                          + '"</strong></td></tr>');
+                  }
+                  else
+                  {
+                      $('.search-query-sf').remove();
+                  }
+
+                  if( rowText.indexOf( inputText ) == -1 )
+                  {
+                      //hide rows
+                      tableRowsClass.eq(i).hide();
+                      
+                  }
+                  else
+                  {
+                      $('.search-sf').remove();
+                      tableRowsClass.eq(i).show();
+                  }
+              });
+              //all tr elements are hidden
+              if(tableRowsClass.children(':visible').length == 0)
+              {
+                  tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+              }
+          });
+      });
+    </script>
   </head>
 
   <body>
@@ -49,59 +96,108 @@
     <div class="container" >
 
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-8">
+          <div class="col-md-12">
+              <form action="#" method="get">
+                  <div class="input-group">
+                      <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                      <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                      <span class="input-group-btn">
+                          <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                      </span>
+                  </div>
+              </form>
+          </div>
+          <div class="col-md-12">
+              <table class="table table-list-search">
+                <thead>
+                    <tr>
+                      <th>User Id</th>
+                      <th>Service Type</th>
+                      <th>Date</th>
+                      <th>Length</th>
+                      <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @for(serviceData <-serviceLogData){
+                    <tr>
+                      <td>@serviceData.userId</td>
+                      <td>@serviceData.serviceType</td>
+                      <td>@serviceData.date</td>
+                      <td>@serviceData.hours hrs @serviceData.minutes mins</td>
+                      <td>@serviceData.comments</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>   
+          </div>
+
+        </div>
+        <div class="col-lg-4">
 
           <div class="col-lg-12">
             <h4 class="page-header">Service Log</h4>
           </div>
-          <form role="form" action="/user/profile" method="POST">
-            <div class="form-group">
-              <label for="exampleInputEmail1">University</label>
-              <input type="text" class="form-control" id="university" name="university" value="@university">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Greek Organization</label>
-              <input type="text" class="form-control" id="greekOrganization" name="greekOrganization" value="@greekOrganization">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Type</label>
-              <input type="text" class="form-control" id="serviceType" name="serviceType" value="@serviceType">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Date</label>
-              <input type="text" class="form-control" id="date" name="date" value="@date">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Hours</label>
-              <input type="text" class="form-control" id="hours" name="hours" value="@hours">
-            </div>
-			<div class="form-group">
-              <label for="exampleInputEmail1">Minutes</label>
-              <input type="text" class="form-control" id="minutes" name="minutes" value="@minutes">
-            </div>
-			<div class="form-group">
-              <label for="exampleInputEmail1">Comments</label>
-              <input type="text" class="form-control" id="comments" name="comments" value="@comments">
-            </div>
-            <button type="submit" class="btn btn-default btn-block">Update</button>
-          </form>
-        </div>
-                  <button type="submit" class="btn btn-default btn-block">Update</button>
-                  
-                </form>
+          <form class="form-horizontal" role="form" action="/user/servicelog" method="POST">
 
-              
-      
-      <hr>
-      
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="well text-center">
-            More Features To Come! 
-          </div>
-        </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">User Name</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="userId">
+                  @for(user <- associatedUsers){
+                    <option value="@user.id">@user.firstName @user.lastName</option>
+                  }
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">Service Type</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="serviceType">
+                  <option value="Philanthropy">Philanthropy</option>
+                  <option value="Fundraising">Fundraising</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">Date</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="date" name="date" placeholder="12-11-2013">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-5 control-label">Hours</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="date" name="hours" placeholder="2">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-5 control-label">Minutes</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="date" name="date" placeholder="15">
+                  </div>
+                </div>
+              </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">Comments</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" rows="3" name="comments"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default btn-block">Submit</button>
+          </form>
+        </div>                  
       </div>
       
+
+    </div><!-- /.container -->
+
       <footer>
         <hr>
         <div class="row">
@@ -110,9 +206,6 @@
           </div>
         </div>
       </footer>
-
-    </div><!-- /.container -->
-
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->

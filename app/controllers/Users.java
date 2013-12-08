@@ -156,22 +156,48 @@ public class Users extends Controller {
 	
 	public static Result serviceLog(){
 		if(Auth.isLoggedIn()){
+			List<ServiceLog> serviceLogData = ServiceLog.find.all();
+
+			List<User> allAssociatedUsers = User.find
+			        						.where()
+			        						.eq("greekOrganization", Auth.getUser().greekOrganization)
+			        						.eq("university", Auth.getUser().university)
+			        						.findList();
+
 			return ok(servicelog.render(
-						Auth.getUser().serviceLog.id,
-						Auth.getUser().serviceLog.userId,
-						Auth.getUser().serviceLog.university,
-						Auth.getUser().serviceLog.greekOrganization,
-						Auth.getUser().serviceLog.serviceType,
-						Auth.getUser().serviceLog.date,
-						Auth.getUser().serviceLog.hours,
-						Auth.getUser().serviceLog.minutes,
-						Auth.getUser().serviceLog.comments,
-						Auth.getUser().accessLevel
+						serviceLogData,
+						Auth.getUser().accessLevel,
+						Auth.getUser().greekOrganization,
+						Auth.getUser().university,
+						allAssociatedUsers
 					)
 				);
 
 		} else {
         	return redirect("/");
     	}	
+	}
+
+	public static Result addServiceLog(){
+		if(Auth.isLoggedIn() && Auth.getUser().accessLevel == 1){
+			ServiceModel data = new Form<ServiceModel>(ServiceModel.class).bindFromRequest().get();
+
+			ServiceLog addServiceLog = new ServiceLog();
+
+			addServiceLog.userId = data.userId;
+			addServiceLog.university = Auth.getUser().university;
+			addServiceLog.greekOrganization = Auth.getUser().greekOrganization;
+			addServiceLog.serviceType = data.serviceType;
+			addServiceLog.date = data.date;
+			addServiceLog.hours = data.hours;
+			addServiceLog.minutes = data.minutes;
+			addServiceLog.comments = data.comments;
+
+			addServiceLog.save();
+
+			return redirect("/user/servicelog");
+		} else {
+			return redirect("/user/users");
+		}
 	}
 }
