@@ -148,6 +148,61 @@
             <div class="alert alert-info">Hi @firstName, you are an admin!</div>
           }
           
+          <div class="span3">
+              <h4>Activity Stats:</h4>
+            <ul class="unstyled">
+                <li>Events Attended <span class="pull-right strong">45%</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                    </div>
+                  </div>
+                </li>
+                <li>Philanthropy Hours: <span class="pull-right strong">30%</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                    </div>
+                  </div>
+                </li>
+                <li>Fundraising Hours: <span class="pull-right strong">25%</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                    </div>
+                  </div>
+                </li>
+                <li>Something else: <span class="pull-right strong">50%</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                    </div>
+                  </div>
+                </li>
+            </ul>
+          </div>
+
+
+
+          <div class="row">
+          
+            <div class="col-lg-12">
+              <h4 class="page-header">Your Friends</h4>
+            </div>
+            
+
+            @users.map{ user=>
+              @if(((user.facebookId != facebookId) || (facebookId == null)) && id != user.id){
+                <div class="col-lg-4 col-md-4 col-xs-6 thumb">
+                  @if(user.facebookId == null) {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
+                  } else {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=200&height=250" title="@user.firstName @user.lastName"></a>
+                  }
+
+                </div>
+              }
+            }
+
+          </div> 
+
+
 
         </div>
         <div class="col-lg-5">
@@ -212,7 +267,6 @@
           </form>
         </div>
         <div class="col-lg-4">
-
           <div class="row">
             <div class="col-lg-12">
               <h4 class="page-header">Your address</h4>
@@ -322,28 +376,7 @@
 
 
           </div>  
-
-          <div class="row">
-          
-            <div class="col-lg-12">
-              <h4 class="page-header">Your Friends</h4>
-            </div>
-            
-
-            @users.map{ user=>
-              @if(((user.facebookId != facebookId) || (facebookId == null)) && id != user.id){
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  @if(user.facebookId == null) {
-                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
-                  } else {
-                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=200&height=250" title="@user.firstName @user.lastName"></a>
-                  }
-
-                </div>
-              }
-            }
-
-          </div>      
+     
 
         </div><!-- /.container -->
 
