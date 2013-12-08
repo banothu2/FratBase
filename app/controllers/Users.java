@@ -34,9 +34,15 @@ public class Users extends Controller {
         	//Address address = new Address(); 
         	//address.addressLineOne = "hello";
         	//find row where userId = Auth.getUser().id;
-
 			return ok(profile.render(
 						Auth.getUser().id,
+						Auth.getUser().greekName,
+						Auth.getUser().age,
+						Auth.getUser().sex,
+						Auth.getUser().graduationDate,
+						Auth.getUser().phoneNumber,
+						Auth.getUser().linkedIn,
+						Auth.getUser().relationshipStatus,
 						Auth.getUser().firstName,
 						Auth.getUser().lastName,
 						Auth.getUser().major,
@@ -44,7 +50,6 @@ public class Users extends Controller {
 						Auth.getUser().university,
 						Auth.getUser().greekOrganization,
 						Auth.getUser().facebookId,
-						Auth.getUser().sex,
 						Auth.getUser().accessLevel, 
 						users,
 						address
@@ -65,6 +70,13 @@ public class Users extends Controller {
 			profileUser.lastName = data.lastName;
 			profileUser.email = data.email;
 			profileUser.major = data.major;
+			profileUser.age = data.age; 
+			profileUser.sex = data.sex;
+			profileUser.graduationDate = data.graduationDate; 
+			profileUser.phoneNumber = data.phoneNumber; 
+			profileUser.linkedIn = data.linkedIn;
+			profileUser.relationshipStatus = data.relationshipStatus;
+			profileUser.greekName = data.greekName;
 			profileUser.save();
 
 			return redirect("/user/profile");
