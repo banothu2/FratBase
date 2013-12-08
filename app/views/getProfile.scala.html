@@ -1,1 +1,137 @@
 @(user: User)
+
+<!DOCTYPE html>
+<html lang="en">
+<!--(age: String)(sex: String)(graduationDate: String)(major: String)-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@user.firstName @user.lastName's Profile</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Frat-Base</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/user/users">Members</a></li>
+            @if(user.accessLevel == 1){
+              <li><a href="/auth/register">Add Members</a></li>
+            }
+			<li><a href="/user/servicelog">Service Log</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    <hr>
+    <div class="container" >
+
+    	<div class="row">
+    		<div class="col-lg-3" style="padding-top: 65px">
+    		  @if(user.facebookId == null) {
+	            <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a>
+	          } else {
+	            <a class="thumbnail" href="#"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=400&height=500"></a>
+	          }
+	          <h3>@user.firstName @user.lastName</h3>
+	          <h4>Username: @user.username</h4>
+
+          	  <div class="span3" style="padding-top: 30px">
+              <h4>Activity Stats:</h4>
+            	<ul class="unstyled">
+                	<li>Events Attended <span class="pull-right strong">45%</span>
+                  		<div class="progress">
+                    		<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                    		</div>
+                  		</div>
+                	</li>
+	                <li>Philanthropy Hours: <span class="pull-right strong">30%</span>
+	                  <div class="progress">
+	                    <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+	                    </div>
+	                  </div>
+	                </li>
+	                <li>Fundraising Hours: <span class="pull-right strong">25%</span>
+	                  <div class="progress">
+	                    <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+	                    </div>
+	                  </div>
+	                </li>
+	                <li>Something else: <span class="pull-right strong">50%</span>
+	                  <div class="progress">
+	                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+	                    </div>
+	                  </div>
+	                </li>
+            	</ul>
+          	  </div>
+    		</div>
+    		<div class="col-lg-5">
+    		  <div class="col-lg-12">
+	            <h4 class="page-header">@user.firstName's Profile</h4>
+	          </div>
+
+			  <form class="form-horizontal" role="form">
+			    <div class="form-group">
+			      <label class="col-sm-2 control-label">Email</label>
+			      <div class="col-sm-10">
+			        <p class="form-control-static">email@@example.com</p>
+			      </div>
+			    </div>
+			  </form>
+    		</div>
+
+
+    	</div>
+
+    </div><!-- /.container -->
+      <hr>
+
+	  <div class="row">
+	    <div class="col-lg-12">
+	      <div class="well text-center">
+	        More Features To Come! 
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <footer>
+	    <hr>
+	    <div class="row">
+	      <div class="col-lg-12">
+	        <p>Copyright &copy; FratBase 2013 &middot; Facebook &middot; Twitter &middot; Google+</p>
+	      </div>
+	    </div>
+	  </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/js/bootstrap.js"></script>
+  </body>
+</html>
