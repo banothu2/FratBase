@@ -39,6 +39,7 @@ public class Users extends Controller {
 						Auth.getUser().id,
 						Auth.getUser().firstName,
 						Auth.getUser().lastName,
+						Auth.getUser().major,
 						Auth.getUser().email,
 						Auth.getUser().university,
 						Auth.getUser().greekOrganization,
@@ -46,8 +47,8 @@ public class Users extends Controller {
 						Auth.getUser().sex,
 						Auth.getUser().accessLevel, 
 						users,
-						address,
-						Auth.getUser().major
+						address
+						
 					)
 				);
 
