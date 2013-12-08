@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!--(age: String)(sex: String)(graduationDate: String)(major: String)-->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -240,29 +239,65 @@
               <input type="text" class="form-control" id="major" name="major" value="@major">
             </div>
 			<div class="form-group">
-              <label for="exampleInputEmail1">Age</label>
-              <input type="text" class="form-control" id="age" name="age" value="@age">
-            </div>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Age</label><br>
+                      <select class="form-control" name="age">
+					    <option value="@age">@age</option>
+						@if(age != 18){
+                        <option value="18">18</option>
+						}
+                        @if(age != 19){
+                        <option value="19">19</option>
+						}@if(age != 20){
+                        <option value="20">20</option>
+						}@if(age != 21){
+                        <option value="21">21</option>
+						}@if(age != 22){
+                        <option value="22">22</option>
+						}@if(age != 23){
+                        <option value="23">23</option>
+						}
+                      </select>
+                    </div>
 			<div class="form-group">
-              <label for="exampleInputEmail1">Sex</label>
-              <input type="text" class="form-control" id="sex" name="sex" value="@sex">
-            </div>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Sex</label><br>
+                      <select class="form-control" name="sex">
+					    <option value="@sex">@sex</option>
+						@if(sex != "Male"){
+                        <option value="Male">Male</option>
+						} 
+						@if(sex != "Female"){
+                        <option value="Female">Female</option>
+						}
+                      </select>
+                    </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Graduation Date</label>
               <input type="text" class="form-control" id="graduationDate" name="graduationDate" value="@graduationDate">
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Phone Number</label>
-              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="@phoneNumber">
+			  <p style="font-size: 11px"><em>format:555-555-5555</em></p>
+              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phoneNumber" name="phoneNumber" value="@phoneNumber">
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">LinkedIn Profile</label>
               <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="@linkedIn">
             </div>
 			<div class="form-group">
-              <label for="exampleInputEmail1">Relationship Status</label>
-              <input type="text" class="form-control" id="relationshipStatus" name="relationshipStatus" value="@relationshipStatus">
-            </div>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Relationship Status</label><br>
+                      <select class="form-control" name="relationshipStatus">
+						@if(relationshipStatus){
+							 <option value="@relationshipStatus">In A Relationship</option>
+						} else {
+							<option value="@relationshipStatus">Not In A Relationship</option>
+						}
+						@if(!relationshipStatus){
+                        <option value="true">In A Relationship</option>
+						}else{
+                        <option value="false">Not In A Relationship</option>
+						}
+                      </select>
+                    </div>
             <button type="submit" class="btn btn-default btn-block">Update</button>
           </form>
         </div>
