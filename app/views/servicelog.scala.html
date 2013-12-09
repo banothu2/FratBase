@@ -116,6 +116,7 @@
               <table class="table table-list-search">
                 <thead>
                     <tr>
+					  <th>#</th>
                       <th>User Id</th>
                       <th>Service Type</th>
                       <th>Date</th>
@@ -126,12 +127,13 @@
                 <tbody>
                   @for(serviceData <-serviceLogData){
                     <tr>
+					  <td>@serviceData.id</td>
                       <td>@serviceData.userId</td>
                       <td>@serviceData.serviceType</td>
                       <td>@serviceData.date</td>
                       <td>@serviceData.hours hrs @serviceData.minutes mins</td>
                       <td>@serviceData.comments</td>
-					  <th><a href="/user/deleteservice">Delete</a></th>
+					  <th><a href="/user/deleteservice/@serviceData.id">Delete</a></th>
                     </tr>
                   }
                 </tbody>

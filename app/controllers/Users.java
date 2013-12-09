@@ -202,25 +202,14 @@ public class Users extends Controller {
 		}
 	}
 	
-	public static Result deleteServiceLog(){
+	public static Result deleteServiceLog(Long id){
 	if(Auth.isLoggedIn() && Auth.getUser().accessLevel == 1){
-			ServiceModel data = new Form<ServiceModel>(ServiceModel.class).bindFromRequest().get();
-
-			ServiceLog addServiceLog = new ServiceLog();
-
-			addServiceLog.userId = data.userId;
-			addServiceLog.university = Auth.getUser().university;
-			addServiceLog.greekOrganization = Auth.getUser().greekOrganization;
-			addServiceLog.serviceType = data.serviceType;
-			addServiceLog.date = data.date;
-			addServiceLog.hours = data.hours;
-			addServiceLog.minutes = data.minutes;
-			addServiceLog.comments = data.comments;
-
-			addServiceLog.save();
+			
+			ServiceLog.find.ref(id).delete();
 
 			return redirect("/user/servicelog");
 		} else {
 			return redirect("/user/users");
 		}
+}
 }
