@@ -4,9 +4,7 @@ import java.util.List;
 
 import auth.Auth;
 
-import models.User;
-import models.Address;
-import models.ServiceLog;
+import models.*;
 
 import play.*;
 import play.mvc.*;
@@ -193,5 +191,7 @@ public class Users extends Controller {
 		} else {
 			return redirect("/user/users");
 		}
-}
+	}
+
+
 }

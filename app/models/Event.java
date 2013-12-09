@@ -21,7 +21,7 @@ public class Event extends Model {
 	public Date endDateAndTime;
 	public boolean openEvent;
 	public String location;
-	public String type;
+	public String eventType;
 
 	
 	public static Finder<Long, Event> find = new Finder<Long, Event>(Long.class, Event.class);

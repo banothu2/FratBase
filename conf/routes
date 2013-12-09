@@ -7,7 +7,7 @@ GET     /                           controllers.Application.index()
 
 
 
-# GET     /LoggedIn                   controllers.Application.loggedIn()
+# GET     /LoggedIn                 controllers.Application.loggedIn()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -26,8 +26,9 @@ POST    /user/profile/addAddress	controllers.Users.addAddress()
 POST    /user/profile/updateAddress controllers.Users.updateAddress()
 GET     /user/servicelog            controllers.Users.serviceLog()
 POST    /user/servicelog 			controllers.Users.addServiceLog()
-GET     /user/deleteservice/:id         controllers.Users.deleteServiceLog(id: Long)
-
+GET     /user/deleteservice/:id     controllers.Users.deleteServiceLog(id: Long)
+GET     /user/events                controllers.Events.renderEventPage()
+POST   /events                      controllers.Events.createEvent()
 
 #GET    /clients                    controllers.Clients.list(page: Integer ?= 1)
 

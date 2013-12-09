@@ -24,7 +24,7 @@ create table event (
   end_date_and_time         datetime,
   open_event                tinyint(1) default 0,
   location                  varchar(255),
-  type                      varchar(255),
+  event_type                varchar(255),
   constraint pk_event primary key (id))
 ;
 
