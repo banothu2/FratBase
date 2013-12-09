@@ -28,7 +28,7 @@ create table greek (
 
 create table service_log (
   id                        integer auto_increment not null,
-  user_id                   varchar(255),
+  user_id                   integer,
   university                varchar(255),
   greek_organization        varchar(255),
   service_type              varchar(255),
@@ -64,6 +64,8 @@ create table user (
   constraint pk_user primary key (id))
 ;
 
+alter table service_log add constraint fk_service_log_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_service_log_user_1 on service_log (user_id);
 
 
 

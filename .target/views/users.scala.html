@@ -1,17 +1,233 @@
 @(users: List[User])
 
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Username</th>
-		<th>E-mail</th>
-		
-	</tr>
-	@users.map { user =>
-		<tr>
-			<td>@user.name</td>
-			<td>@user.username</td>
-			<td>@user.email</td>
-		</tr>
-	}
-</table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fraternity Management System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS for the '4 Col Portfolio' Template -->
+    <link href="/public/css/spec/4-col-portfolio.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          var activeSystemClass = $('.list-group-item.active');
+
+          //something is entered in search form
+          $('#system-search').keyup( function() {
+             var that = this;
+              // affect all table rows on in systems table
+              var tableBody = $('.table-list-search tbody');
+              var tableRowsClass = $('.table-list-search tbody tr');
+              $('.search-sf').remove();
+              tableRowsClass.each( function(i, val) {
+              
+                  //Lower text for case insensitive
+                  var rowText = $(val).text().toLowerCase();
+                  var inputText = $(that).val().toLowerCase();
+                  if(inputText != '')
+                  {
+                      $('.search-query-sf').remove();
+                      tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong>Searching for: "'
+                          + $(that).val()
+                          + '"</strong></td></tr>');
+                  }
+                  else
+                  {
+                      $('.search-query-sf').remove();
+                  }
+
+                  if( rowText.indexOf( inputText ) == -1 )
+                  {
+                      //hide rows
+                      tableRowsClass.eq(i).hide();
+                      
+                  }
+                  else
+                  {
+                      $('.search-sf').remove();
+                      tableRowsClass.eq(i).show();
+                  }
+              });
+              //all tr elements are hidden
+              if(tableRowsClass.children(':visible').length == 0)
+              {
+                  tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+              }
+          });
+      });
+    </script>
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Frat-Base</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/user/users">Members</a></li>
+            <li><a href="#contact">Feature</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <h1 class="page-header">Displaying Current Members:</h1>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <form action="#" method="get">
+                <div class="input-group">
+                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                    <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+          <table class="table table-list-search">
+            <thead>
+              <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
+              </tr>
+            </thead>
+            <tbody>
+              @users.map{ user=>
+                <tr>
+                  <td style="width: 50px;"> 
+                    @if(user.facebookId == null) {
+                      <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg"></a>
+                    } else {
+                      <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=400&height=500"></a>
+                    }
+                        </td>
+                  <td><p>@user.firstName @user.lastName</p><p>@user.username</p></td>
+                  <td>@user.email</td>
+                  <td></td>
+                </tr>
+
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 
+        @users.map{ user=>
+        <ul class="thumbnails list-unstyled">
+          <li class="col-md-3">
+            <div class="thumbnail" style="padding: 0">
+              <div style="padding:4px">
+                @if(user.facebookId == null){
+                  <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
+                } else {
+                  <img alt="300x200" style="width: 100%" src="https://graph.facebook.com/@user.facebookId/picture?width=300&height=200">
+                }
+              </div>
+              <div class="caption">
+                <h2>@user.firstName @user.lastName</h2>
+                <p>@user.email</p> 
+                <p><i class="icon icon-map-marker"></i> Place, Country</p>
+              </div>
+              <div class="modal-footer" style="text-align: left">
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                      <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4"><b>60%</b><br/><small>Philanthropy</small></div>
+                  <div class="col-md-4"><b>$400</b><br/><small>Fundraising</small></div>
+                  <div class="col-md-4"><b>18</b><br/><small>Events</small></div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        }
+        -->
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+      <hr>
+
+      <div class="row text-center">
+        <div class="col-lg-12">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>        
+        </div>
+
+      </div>
+
+    </div><!-- /.container -->
+
+    <div class="container">
+
+      <hr>
+
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Copyright &copy; FratBase 2013</p>
+          </div>
+        </div>
+      </footer>
+      
+    </div><!-- /.container -->
+
+  <!-- javascript -->
+  <script src="/public/js/jquery.js"></script>
+  <script src="/public/js/bootstrap.js"></script>
+
+  </body>
+
+</html>

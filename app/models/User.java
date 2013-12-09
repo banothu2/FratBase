@@ -36,8 +36,6 @@ public class User extends Model {
 	public String status; 
 	public int accessLevel;
 	
-	public ServiceLog serviceLog;
-	
 	public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 	
 	public static String hash(String data) {

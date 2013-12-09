@@ -128,7 +128,7 @@
                   @for(serviceData <-serviceLogData){
                     <tr>
 					  <td>@serviceData.id</td>
-                      <td>@serviceData.userId</td>
+                      <td>@serviceData.user.firstName</td>
                       <td>@serviceData.serviceType</td>
                       <td>@serviceData.date</td>
                       <td>@serviceData.hours hrs @serviceData.minutes mins</td>

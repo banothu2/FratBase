@@ -11,7 +11,8 @@ import play.data.validation.*;
 public class ServiceLog extends Model {
 	@Id
 	public int id;
-	public String userId;
+	@ManyToOne
+	public User user;
 	public String university;
 	public String greekOrganization;
 	public String serviceType;
@@ -19,6 +20,7 @@ public class ServiceLog extends Model {
 	public String hours;
 	public String minutes;
 	public String comments;
+	
 	
 	public static Finder<Long, ServiceLog> find = new Finder<Long, ServiceLog>(Long.class, ServiceLog.class);
 	

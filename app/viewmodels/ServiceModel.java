@@ -2,7 +2,7 @@ package viewmodels;
 
 public class ServiceModel {
 
-	public String userId;
+	public int userId;
 	public String university;
 	public String greekOrganization;
 	public String serviceType;
