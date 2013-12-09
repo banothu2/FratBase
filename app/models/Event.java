@@ -14,11 +14,12 @@ public class Event extends Model {
 
 	@Id
 	public int id;
-	public int greekId;
+	@ManyToOne
+	public Greek greek;
 	public String name;
-	public String startDateAndTime;
-	public String endDateAndTime;
-	public String openEvent;
+	public Date startDateAndTime;
+	public Date endDateAndTime;
+	public boolean openEvent;
 	public String location;
 	public String type;
 

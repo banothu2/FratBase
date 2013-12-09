@@ -10,8 +10,7 @@ public class RegisterModel {
 	public int age; 
 	public String sex;
 	public String graduationDate; 
-	public String university;
-	public String greekOrganization;
+	public int greekId;
 	public String greekName;
 	public String profilePicture; 
 	public String facebookId;

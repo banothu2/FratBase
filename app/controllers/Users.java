@@ -20,38 +20,19 @@ public class Users extends Controller {
 	
 	public static Result profile(){
 		if(Auth.isLoggedIn()){
-
-        	//List<User> users = User.find.all();
         	List<User> users = User.find
         						.where()
-        						.eq("greekOrganization", Auth.getUser().greekOrganization)
-        						.eq("university", Auth.getUser().university)
+        						.eq("greek.id", Auth.getUser().greek.id)
         						.findList();
         	Address address = Address.find
         						.where()
-        						.eq("userId", Auth.getUser().id)
+        						.eq("user.id", Auth.getUser().id)
         						.findUnique();
 
-        	//Address address = new Address(); 
-        	//address.addressLineOne = "hello";
-        	//find row where userId = Auth.getUser().id;
+        	User userProfile = Auth.getUser();
+
 			return ok(profile.render(
-						Auth.getUser().id,
-						Auth.getUser().greekName,
-						Auth.getUser().age,
-						Auth.getUser().sex,
-						Auth.getUser().graduationDate,
-						Auth.getUser().phoneNumber,
-						Auth.getUser().linkedIn,
-						Auth.getUser().relationshipStatus,
-						Auth.getUser().firstName,
-						Auth.getUser().lastName,
-						Auth.getUser().major,
-						Auth.getUser().email,
-						Auth.getUser().university,
-						Auth.getUser().greekOrganization,
-						Auth.getUser().facebookId,
-						Auth.getUser().accessLevel, 
+						userProfile,
 						users,
 						address
 					)
@@ -94,11 +75,7 @@ public class Users extends Controller {
 			User user = Auth.getUser();
 			Address addAddress = new Address();
 
-
-			addAddress.userId = Auth.getUser().id;
-			addAddress.firstName = Auth.getUser().firstName;
-			addAddress.lastName = Auth.getUser().lastName; 
-			addAddress.facebookId = Auth.getUser().facebookId;
+			addAddress.user = Auth.getUser();
 			addAddress.addressLineOne = data.addressLineOne;
 			addAddress.addressLineTwo = data.addressLineTwo;
 			addAddress.city = data.city;
@@ -122,7 +99,7 @@ public class Users extends Controller {
 			User user = Auth.getUser();
 			Address updateAddress = Address.find
         						.where()
-        						.eq("userId", Auth.getUser().id)
+        						.eq("user.id", Auth.getUser().id)
         						.findUnique();
 
 			updateAddress.addressLineOne = data.addressLineOne;
@@ -149,7 +126,7 @@ public class Users extends Controller {
 								.findUnique();
 			Address userAddress = Address.find
 										   .where()
-										   .eq("userId", viewUser.id)
+										   .eq("user.id", viewUser.id)
 										   .findUnique();
 
 			return ok(getProfile.render(
@@ -167,15 +144,16 @@ public class Users extends Controller {
 
 			List<User> allAssociatedUsers = User.find
 			        						.where()
-			        						.eq("greekOrganization", Auth.getUser().greekOrganization)
-			        						.eq("university", Auth.getUser().university)
+			        						.eq("greek.id", Auth.getUser().greek.id)
 			        						.findList();
+
+			User userData = Auth.getUser();
 
 			return ok(servicelog.render(
 						serviceLogData,
-						Auth.getUser().accessLevel,
-						Auth.getUser().greekOrganization,
-						Auth.getUser().university,
+						userData.accessLevel,
+						userData.greek.name,
+						userData.greek.university,
 						allAssociatedUsers
 					)
 				);
@@ -192,8 +170,7 @@ public class Users extends Controller {
 			ServiceLog addServiceLog = new ServiceLog();
 
 			addServiceLog.user = User.find.byId(Long.valueOf(data.userId));
-			addServiceLog.university = Auth.getUser().university;
-			addServiceLog.greekOrganization = Auth.getUser().greekOrganization;
+			addServiceLog.greek = Auth.getUser().greek;
 			addServiceLog.serviceType = data.serviceType;
 			addServiceLog.date = data.date;
 			addServiceLog.hours = data.hours;

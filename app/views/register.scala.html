@@ -1,4 +1,4 @@
-@(message: String)(test: String)
+@(greeks: List[Greek])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,13 +40,10 @@
     		<input type="text" class="form-control" placeholder="Email" name="email" required autofocus>
         <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
         <input type="password" class="form-control" placeholder="Password" name="password" required>
-        <select name="university" class="input-lg btn-block">
-			    <option value="University of Illinois"> University of Illinois</option>
-			    <option value="Stanford University"> Stanford University </option>
-		    </select>
-        <select name="greekOrganization" class="input-lg btn-block">
-			    <option value="Alpha Beta"> Alpha Beta Fraternity</option>
-			    <option value="Gamma Delta"> Gamma Delta Fraternity </option>
+        <select name="greekId" class="input-lg btn-block">
+          @for(greek <- greeks){
+            <option value="@greek.id">@greek.name @greek.university</option>
+          }
 		    </select> 
         <select name="accessLevel"class="input-lg btn-block"> Is Admin
           <option value="1">Is Admin</option>

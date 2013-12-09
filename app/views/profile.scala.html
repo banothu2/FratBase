@@ -1,4 +1,4 @@
-@(id: Int)(greekName: String)(age: Int)(sex: String)(graduationDate: String)(phoneNumber: String)(linkedIn: String)(relationshipStatus: Boolean)(firstName: String)(lastName: String)(major: String)(email: String)(university: String)(greekOrganization: String)(facebookId: String)(accessLevel: Int)(users: List[User])(address: Address)
+@(user: User)(users: List[User])(address: Address)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +85,7 @@
           //console.log(response.id + " " 
                     //+ response.link + " " 
                     //+ response.gender + " ");
-          @if(facebookId == null) {
+          @if(user.facebookId == null) {
               $.post("/api/facebookConnect", {
                 id: response.id,
                 gender: response.gender
@@ -118,7 +118,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/user/dashboard">Dashboard</a></li>
             <li><a href="/user/users">Members</a></li>
-            @if(accessLevel == 1){
+            @if(user.accessLevel == 1){
               <li><a href="/auth/register">Add Members</a></li>
             }
 			<li><a href="/user/servicelog">Service Log</a></li>
@@ -134,17 +134,17 @@
           
           <!-- <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a> -->
                     
-          @if(facebookId == null) {
+          @if(user.facebookId == null) {
             <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a>
           } else {
-            <a class="thumbnail" href="#"><img class="img-responsive" src="https://graph.facebook.com/@facebookId/picture?width=400&height=500"></a>
+            <a class="thumbnail" href="#"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=400&height=500"></a>
           }
 
-          @if(facebookId == null) {
+          @if(user.facebookId == null) {
             <button type="button" class="btn btn-success btn-block" onclick="FB.login()">Link your facebook account!</button>
           } 
-          @if(accessLevel == 1){
-            <div class="alert alert-info">Hi @firstName, you are an admin!</div>
+          @if(user.accessLevel == 1){
+            <div class="alert alert-info">Hi @user.firstName, you are an admin!</div>
           }
           
           <div class="span3">
@@ -186,10 +186,10 @@
             </div>
             
 
-            @users.map{ user=>
-              @if(((user.facebookId != facebookId) || (facebookId == null)) && id != user.id){
+            @users.map{ friend=>
+              @if(((friend.facebookId != user.facebookId) || (user.facebookId == null)) && user.id != friend.id){
                 <div class="col-lg-4 col-md-4 col-xs-6 thumb">
-                  @if(user.facebookId == null) {
+                  @if(friend.facebookId == null) {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
                   } else {
                     <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=200&height=250" title="@user.firstName @user.lastName"></a>
@@ -212,86 +212,78 @@
           <form role="form" action="/user/profile" method="POST">
             <div class="form-group">
               <label for="exampleInputEmail1">First Name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" value="@firstName">
+              <input type="text" class="form-control" id="firstName" name="firstName" value="@user.firstName">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Last Name</label>
-              <input type="text" class="form-control" id="lastName" name="lastName" value="@lastName">
+              <input type="text" class="form-control" id="lastName" name="lastName" value="@user.lastName">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email</label>
-              <input type="text" class="form-control" id="firstName" name="email" value="@email">
+              <input type="text" class="form-control" id="firstName" name="email" value="@user.email">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">University</label>
-              <input type="text" class="form-control" id="firstName" name="university" value="@university" disabled>
+              <input type="text" class="form-control" id="firstName" name="university" value="@user.greek.university" disabled>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Greek Organization</label>
-              <input type="text" class="form-control" id="firstName" name="greek" value="@greekOrganization" disabled>
+              <input type="text" class="form-control" id="firstName" name="greek" value="@user.greek.name" disabled>
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Greek Name</label>
-              <input type="text" class="form-control" id="greekName" name="greekName" value="@greekName">
+              <input type="text" class="form-control" id="greekName" name="greekName" value="@user.greekName">
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Major</label>
-              <input type="text" class="form-control" id="major" name="major" value="@major">
+              <input type="text" class="form-control" id="major" name="major" value="@user.major">
             </div>
 			<div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Age</label><br>
                       <select class="form-control" name="age">
-					    <option value="@age">@age</option>
-						@if(age != 18){
+					              <option value="@user.age">@user.age</option>
                         <option value="18">18</option>
-						}
-                        @if(age != 19){
                         <option value="19">19</option>
-						}@if(age != 20){
                         <option value="20">20</option>
-						}@if(age != 21){
                         <option value="21">21</option>
-						}@if(age != 22){
                         <option value="22">22</option>
-						}@if(age != 23){
                         <option value="23">23</option>
-						}
                       </select>
                     </div>
 			<div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Sex</label><br>
                       <select class="form-control" name="sex">
-					    <option value="@sex">@sex</option>
-						@if(sex != "Male"){
+					    <option value="@user.sex">@user.sex</option>
+						@if(user.sex != "Male"){
                         <option value="Male">Male</option>
 						} 
-						@if(sex != "Female"){
+						@if(user.sex != "Female"){
                         <option value="Female">Female</option>
 						}
                       </select>
                     </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Graduation Date</label>
-              <input type="text" class="form-control" id="graduationDate" name="graduationDate" value="@graduationDate">
+              <input type="text" class="form-control" id="graduationDate" name="graduationDate" value="@user.graduationDate">
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">Phone Number</label>
 			  <p style="font-size: 11px"><em>format:555-555-5555</em></p>
-              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phoneNumber" name="phoneNumber" value="@phoneNumber">
+              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phoneNumber" name="phoneNumber" value="@user.phoneNumber">
             </div>
 			<div class="form-group">
               <label for="exampleInputEmail1">LinkedIn Profile</label>
-              <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="@linkedIn">
+              <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="@user.linkedIn">
             </div>
 			<div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Relationship Status</label><br>
                       <select class="form-control" name="relationshipStatus">
-						@if(relationshipStatus){
-							 <option value="@relationshipStatus">In A Relationship</option>
+						@if(user.relationshipStatus){
+							 <option value="@user.relationshipStatus">In A Relationship</option>
 						} else {
-							<option value="@relationshipStatus">Not In A Relationship</option>
+							<option value="@user.relationshipStatus">Not In A Relationship</option>
 						}
-						@if(!relationshipStatus){
+						@if(!user.relationshipStatus){
                         <option value="true">In A Relationship</option>
 						}else{
                         <option value="false">Not In A Relationship</option>

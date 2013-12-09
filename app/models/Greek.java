@@ -11,7 +11,7 @@ import play.data.validation.*;
 public class Greek extends Model {
 	@Id
 	public int id;
-	public String greekName;
+	public String name;
 	public String university;
 	
 	public static Finder<Long, Greek> find = new Finder<Long, Greek>(Long.class, Greek.class);

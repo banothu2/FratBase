@@ -2,7 +2,7 @@ package viewmodels;
 
 public class AddressUpdate {
 	public int id;
-	public String userId;
+	public int userId;
 	public String firstName; 
 	public String lastName; 
 	public String facebookId;

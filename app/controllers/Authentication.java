@@ -4,7 +4,7 @@ import java.util.List;
 
 import auth.Auth;
 
-import models.User;
+import models.*;
 import play.*;
 import play.mvc.*;
 import viewmodels.*;
@@ -21,10 +21,13 @@ public class Authentication extends Controller {
     }
 
     public static Result create(){
-        return ok(register.render("apple", "test"));
+
+        return ok(register.render(
+                            Greek.find.all()
+            ));
     }
 
-    public static Result createUser(RegisterModel data) {
+    public static void createUser(RegisterModel data) {
     	
     	User user = new User();
     	user.firstName = data.firstName;
@@ -35,8 +38,7 @@ public class Authentication extends Controller {
         // user.age = data.age;
         // user.sex = data.sex;
         // user.graduationDate = data.graduationDate;
-        user.university = data.university;
-        user.greekOrganization = data.greekOrganization;
+        user.greek = Greek.find.byId(Long.valueOf(data.greekId));
         // user.greekName = data.greekName;
         // user.profilePicture = data.profilePicture;
         // user.facebookId = data.facebookId;
@@ -50,12 +52,13 @@ public class Authentication extends Controller {
 
     	user.save();
 
-    	return ok("wuhi: " + user.id);
+    	//return ok("wuhi: " + user.id);
     }
 
     public static Result doRegister() {
     	RegisterModel data = new Form<RegisterModel>(RegisterModel.class).bindFromRequest().get();
         createUser(data);
+
         return redirect("/auth/login");
         //return ok("Created user with email: " + data.email);
         //return ok(data.email +" "+ data.password + " "+ data.firstName + " "+ data.lastName + " "+ data.university + " "+ data.greek);

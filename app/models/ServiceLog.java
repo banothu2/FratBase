@@ -13,18 +13,15 @@ public class ServiceLog extends Model {
 	public int id;
 	@ManyToOne
 	public User user;
-	public String university;
-	public String greekOrganization;
+	@ManyToOne 
+	public Greek greek;
 	public String serviceType;
 	public String date;
-	public String hours;
-	public String minutes;
+	public int hours;
+	public int minutes;
 	public String comments;
 	
 	
 	public static Finder<Long, ServiceLog> find = new Finder<Long, ServiceLog>(Long.class, ServiceLog.class);
-	
-	public static String hash(String data) {
-		return data; // TODO: Add hash function
-	}
+
 }

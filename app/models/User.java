@@ -13,13 +13,13 @@ import models.ServiceLog;
 public class User extends Model {
 	@Id
 	public int id;
+	@ManyToOne
+	public Greek greek;
 	public String firstName;
 	public String lastName;
 	public String username;
 	public String passwordHash;
 	public String email;
-	public String university;
-	public String greekOrganization;
 	
 	public int age; 
 	public String sex;
