@@ -147,8 +147,15 @@ public class Users extends Controller {
 								.where()
 								.eq("username", username)
 								.findUnique();
+			Address userAddress = Address.find
+										   .where()
+										   .eq("userId", viewUser.id)
+										   .findUnique();
 
-			return ok(getProfile.render(viewUser));
+			return ok(getProfile.render(
+									viewUser,
+									userAddress
+				));
 		} else {
 			return redirect("/");
 		}
