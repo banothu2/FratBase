@@ -41,7 +41,18 @@
             @if(user.accessLevel == 1){
               <li><a href="/auth/register">Add Members</a></li>
             }
-			<li><a href="/user/servicelog">Service Log</a></li>
+      <li><a href="/user/servicelog">Service Log</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">@user.firstName @user.lastName<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/user/profile">Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -159,54 +170,101 @@
 			    </div>
 			  </form>
     		</div>
-    		<div class="col-lg-4">
-    		  <div class="col-lg-12">
-	            <h4 class="page-header">Address</h4>
-	          </div>
+    		@if(userAddress != null){
+	    		<div class="col-lg-4">
+	    		  <div class="col-lg-12">
+		            <h4 class="page-header">Address</h4>
+		          </div>
 
-			  <form class="form-horizontal" role="form">
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label">Address </label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.addressLineOne</p>
-			      </div>
-			    </div>
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label"></label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.addressLineTwo</p>
-			      </div>
-			    </div>
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label">City</label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.city</p>
-			      </div>
-			    </div>
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label">State</label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.state</p>
-			      </div>
-			    </div>
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label">Zip</label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.zip</p>
-			      </div>
-			    </div>
-			    <div class="form-group">
-			      <label class="col-sm-4 control-label">Address Type</label>
-			      <div class="col-sm-8">
-			        <p class="form-control-static">@userAddress.state</p>
-			      </div>
-			    </div>
-			    <div>
-			    	 <a class="thumbnail" href="#"><img class="img-responsive" src="http://maps.googleapis.com/maps/api/staticmap?center=@userAddress.addressLineOne,@userAddress.city,@userAddress.state&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284&sensor=false"></a>
-			    </div>
-			  </form>	
-    		</div>
+				  <form class="form-horizontal" role="form">
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Address </label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.addressLineOne</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label"></label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.addressLineTwo</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">City</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.city</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">State</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.state</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Zip</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.zip</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Address Type</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">@userAddress.addressType</p>
+				      </div>
+				    </div>
+				    <div>
+				    	 <a class="thumbnail" href="#"><img class="img-responsive" src="http://maps.googleapis.com/maps/api/staticmap?center=@userAddress.addressLineOne,@userAddress.city,@userAddress.state&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284&sensor=false"></a>
+				    </div>
+				  </form>	
+	    		</div>
+	    	} else {
+	    		<div class="col-lg-4">
+	    		  <div class="col-lg-12">
+		            <h4 class="page-header">Address</h4>
+		          </div>
 
+				  <form class="form-horizontal" role="form">
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Address </label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label"></label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">City</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">State</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Zip</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+				    <div class="form-group">
+				      <label class="col-sm-4 control-label">Address Type</label>
+				      <div class="col-sm-8">
+				        <p class="form-control-static">-</p>
+				      </div>
+				    </div>
+
+				  </form>	
+	    		</div>	    	
+	    	}
     	</div>
 
     </div><!-- /.container -->

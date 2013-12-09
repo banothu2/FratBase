@@ -131,8 +131,7 @@ public class Users extends Controller {
 
 			return ok(getProfile.render(
 									viewUser,
-									userAddress
-				));
+									userAddress				));
 		} else {
 			return redirect("/");
 		}
@@ -151,7 +150,7 @@ public class Users extends Controller {
 
 			return ok(servicelog.render(
 						serviceLogData,
-						userData.accessLevel,
+						userData,
 						userData.greek.name,
 						userData.greek.university,
 						allAssociatedUsers

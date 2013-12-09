@@ -93,7 +93,10 @@ public class Authentication extends Controller {
 
             List<User> users = User.find.all();
 
-            return ok(views.html.users.render(users));
+            return ok(views.html.users.render(
+                                        users,
+                                        Auth.getUser()
+                ));
     }
 }
 
