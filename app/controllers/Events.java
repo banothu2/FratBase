@@ -55,4 +55,39 @@ public class Events extends Controller {
 		}
 	}
 
+	public static Result suggestEvent(){
+		if(Auth.isLoggedIn()){
+
+			SuggestEventModel data = new Form<SuggestEventModel>(SuggestEventModel.class).bindFromRequest().get();
+
+			List<Event> events = Event.find
+									  .where()
+									  .ge("startDateAndTime", data.startDateAndTime)
+									  .le("endDateAndTime", data.endDateAndTime)
+									  .findList();
+
+			//return ok(data.startDateAndTime.toString());
+			return ok(suggestEvents.render(
+									events
+				));
+		} else {
+			return redirect("/");
+		}
+	}
+
+	public static Result attendEvent(int id){
+		if(Auth.isLoggedIn()){
+
+			Attend attend = new Attend();
+
+			attend.user = Auth.getUser();
+			attend.event = Event.find.byId(Long.valueOf(id));
+			attend.save();
+			
+			return redirect("/user/events");
+		} else {
+			return redirect("/");
+		}
+	}
+
 }

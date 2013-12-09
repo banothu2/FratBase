@@ -1,0 +1,4 @@
+@(events: List[Event])
+	@for(event <- events){
+		<h3>@event.name @event.startDateAndTime @event.endDateAndTime @event.location</h3>	
+	}

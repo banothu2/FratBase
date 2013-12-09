@@ -16,6 +16,13 @@ create table address (
   constraint pk_address primary key (id))
 ;
 
+create table attend (
+  id                        integer auto_increment not null,
+  user_id                   integer,
+  event_id                  integer,
+  constraint pk_attend primary key (id))
+;
+
 create table event (
   id                        integer auto_increment not null,
   greek_id                  integer,
@@ -73,14 +80,18 @@ create table user (
 
 alter table address add constraint fk_address_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
 create index ix_address_user_1 on address (user_id);
-alter table event add constraint fk_event_greek_2 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
-create index ix_event_greek_2 on event (greek_id);
-alter table service_log add constraint fk_service_log_user_3 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_service_log_user_3 on service_log (user_id);
-alter table service_log add constraint fk_service_log_greek_4 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
-create index ix_service_log_greek_4 on service_log (greek_id);
-alter table user add constraint fk_user_greek_5 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
-create index ix_user_greek_5 on user (greek_id);
+alter table attend add constraint fk_attend_user_2 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_attend_user_2 on attend (user_id);
+alter table attend add constraint fk_attend_event_3 foreign key (event_id) references event (id) on delete restrict on update restrict;
+create index ix_attend_event_3 on attend (event_id);
+alter table event add constraint fk_event_greek_4 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
+create index ix_event_greek_4 on event (greek_id);
+alter table service_log add constraint fk_service_log_user_5 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_service_log_user_5 on service_log (user_id);
+alter table service_log add constraint fk_service_log_greek_6 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
+create index ix_service_log_greek_6 on service_log (greek_id);
+alter table user add constraint fk_user_greek_7 foreign key (greek_id) references greek (id) on delete restrict on update restrict;
+create index ix_user_greek_7 on user (greek_id);
 
 
 
@@ -89,6 +100,8 @@ create index ix_user_greek_5 on user (greek_id);
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table address;
+
+drop table attend;
 
 drop table event;
 

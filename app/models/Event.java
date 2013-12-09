@@ -6,6 +6,8 @@ import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
+import  play.data.format.Formats;
+
 
 import models.ServiceLog;
 
@@ -17,7 +19,9 @@ public class Event extends Model {
 	@ManyToOne
 	public Greek greek;
 	public String name;
+	@Formats.DateTime(pattern="dd/MM/yyyy HH:mm")
 	public Date startDateAndTime;
+	@Formats.DateTime(pattern="dd/MM/yyyy HH:mm")
 	public Date endDateAndTime;
 	public boolean openEvent;
 	public String location;
