@@ -190,7 +190,7 @@
         <div class="col-lg-4">
 
           <div class="col-lg-12">
-            <h4 class="page-header">Add Service Log</h4>
+            <h4 class="page-header">Add Event</h4>
           </div>
           <form class="form-horizontal" role="form" action="/events" method="POST">
 
@@ -206,7 +206,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">Start Date</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="date" name="startDateAndTime" placeholder="Some name" value="11/12/2013 05:30">
+                <input type="text" pattern="[0-1][0-9]/[0-3][0-9]/[2][0][0-2][0-9] [0-2][0-9]:[0-5][0-9]" class="form-control" id="date" name="startDateAndTime" placeholder="Some name" value="11/12/2013 05:30">
               </div>
             </div>
 
@@ -214,7 +214,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">End Date</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="date" name="endDateAndTime" placeholder="Some name" value="12/12/2013 08:30">
+                <input type="text" pattern="[0-1][0-9]/[0-3][0-9]/[2][0][0-2][0-9] [0-2][0-9]:[0-5][0-9]" class="form-control" id="date" name="endDateAndTime" placeholder="Some name" value="12/12/2013 08:30">
               </div>
             </div>
 
