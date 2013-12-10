@@ -117,19 +117,27 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/user/dashboard">Dashboard</a></li>
-            <li><a href="/user/users">Members</a></li>
-            @if(user.accessLevel == 1){
-              <li><a href="/auth/register">Add Members</a></li>
-            }
-      <li><a href="/user/servicelog">Service Log</a></li>
+            <li><a href="/user/users">View Members</a></li>
+            <li><a href="/user/servicelog">Add Service Hours</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">@user.firstName @user.lastName<b class="caret"></b></a>
               <ul class="dropdown-menu">
+                <li>
+                  @if(user.facebookId != null){
+                    <a href="#"><img src="https://graph.facebook.com/@user.facebookId/picture?width=150&height=100"></a>
+                  }
+                </li>
                 <li><a href="/user/profile">Profile</a></li>
                 <li class="divider"></li>
+                @if(user.accessLevel ==1){
+                  <li><a href="/user/addMembers">Add Users</a></li>
+                  <li><a href="/user/servicelog">Add Service Hours</a></li>
+                  <li><a href="/user/events">Add Events</a></li>
+                  <li class="divider"></li>
+                }
                 <li><a href="#">Logout</a></li>
               </ul>
             </li>
