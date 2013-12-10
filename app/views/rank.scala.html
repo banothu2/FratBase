@@ -34,17 +34,20 @@
         FB.api(
            {
              method: 'fql.query',
-             query: 'SELECT uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
+             query: 'SELECT uid, first_name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
              access_token: access_token
            },function(response){
-           		for(var i = 0; i < response.length; i++){
-           			$("ol").append("<li>"+"<img src='"+response[i].pic+"' alt='ummm'/>"+response[i].first_name+"</li>");
+           		
+              var friendList = "";
+              for(var i = 0; i < response.length; i++){
+           		  if (i > 0) friendList += ",";
+                friendList += response[i].uid;
 
-
+              //	$("ol").append("<li>"+"<img src='"+response[i].pic+"' alt='ummm'/>"+response[i].first_name+"</li>");
+              }
                 $.post("/rank/userFacebookFriends", {
-                  friend: response
+                  friends: friendList
                 }, 
-
                 function(data, status){
                   alert("Data: " + data + "\nStatus: "+ status);
                     if(data == "Added"){
@@ -53,12 +56,6 @@
 
                     }
                 })
-
-
-
-
-                // need to do a post and pass in your friends 
-           		}
 
           console.log(response);
         });

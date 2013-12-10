@@ -1,7 +1,5 @@
 package viewmodels;
 
 public class FacebookFriendsModel {
-	public facebookFriend friend;
+	public String friends; 
 }
-
-
