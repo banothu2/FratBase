@@ -6,7 +6,6 @@
 GET     /                           controllers.Application.index()
 
 
-
 # GET     /LoggedIn                 controllers.Application.loggedIn()
 
 # Map static resources from the /public folder to the /assets URL path
@@ -18,6 +17,9 @@ GET		/auth/users					controllers.Authentication.users()
 # GET 	/auth/login					controllers.Authentication.login()
 GET		/auth/register				controllers.Authentication.create()
 POST	/auth/register				controllers.Authentication.doRegister()
+GET     /user/addMembers            controllers.Authentication.renderAddMemberPage()
+POST    /user/addMembers            controllers.Authentication.addMember()
+
 GET 	/auth/login					controllers.Authentication.login()
 POST 	/auth/login 				controllers.Authentication.doLogin()
 GET     /user/profile 				controllers.Users.profile()

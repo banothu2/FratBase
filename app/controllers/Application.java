@@ -9,15 +9,15 @@ import auth.Auth;
 public class Application extends Controller {
 
     public static Result index() {
-    	if(!Auth.isLoggedIn()){
-        	return ok(index.render("Your."));
+    
+        return redirect("/auth/login");
+    /*	if(!Auth.isLoggedIn()){
+        	return ok(index.render("Logg"));
     	} else {
         	return ok(index.render("Your new application is ."));
     	}
+    */
     }
 
-    public static Result loggedIn(){
-    	return ok(loggedIn.render("You are logged in!"));
-    }
 
 }

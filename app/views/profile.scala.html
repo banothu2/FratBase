@@ -101,7 +101,7 @@
         });
       }
     </script>
-    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+   <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -116,9 +116,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/user/dashboard">Dashboard</a></li>
-            <li><a href="/user/users">View Members</a></li>
-            <li><a href="/user/servicelog">Add Service Hours</a></li>
+            <li><a href="/user/users">Members</a></li>
+            <li><a href="/user/servicelog">Service Hours</a></li>
+            <li><a href="/user/events">Events</a></li>
+            <li><a href="/rank">Ranking</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -195,32 +196,6 @@
                 </li>
             </ul>
           </div>
-
-
-
-          <div class="row">
-          
-            <div class="col-lg-12">
-              <h4 class="page-header">Your Friends</h4>
-            </div>
-            
-
-            @users.map{ friend=>
-              @if(((friend.facebookId != user.facebookId) || (user.facebookId == null)) && user.id != friend.id){
-                <div class="col-lg-4 col-md-4 col-xs-6 thumb">
-                  @if(friend.facebookId == null) {
-                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
-                  } else {
-                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@friend.facebookId/picture?width=200&height=250" title="@friend.firstName @friend.lastName"></a>
-                  }
-
-                </div>
-              }
-            }
-
-          </div> 
-
-
 
         </div>
         <div class="col-lg-5">
@@ -424,6 +399,28 @@
           </div>  
      
 
+          <div class="row">
+          
+            <div class="col-lg-12">
+              <h4 class="page-header">Your Friends</h4>
+            </div>
+            
+
+            @users.map{ friend=>
+              @if(((friend.facebookId != user.facebookId) || (user.facebookId == null)) && user.id != friend.id){
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                  @if(friend.facebookId == null) {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="/public/img/profile.jpg" title="@user.firstName @user.lastName"></a>
+                  } else {
+                    <a class="thumbnail" href="/user/profile"><img class="img-responsive" src="https://graph.facebook.com/@friend.facebookId/picture?width=200&height=250" title="@friend.firstName @friend.lastName"></a>
+                  }
+
+                </div>
+              }
+            }
+
+          </div> 
+
         </div><!-- /.container -->
 
       </div>
@@ -442,7 +439,7 @@
         <hr>
         <div class="row">
           <div class="col-lg-12">
-            <p>Copyright &copy; FratBase 2013 &middot; Facebook &middot; Twitter &middot; Google+</p>
+            <p>Copyright &copy; FratBase 2013</p>
           </div>
         </div>
       </footer>

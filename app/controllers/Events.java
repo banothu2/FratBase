@@ -102,7 +102,8 @@ public class Events extends Controller {
 
 			//return ok(data.startDateAndTime.toString());
 			return ok(suggestEvents.render(
-									events
+									events,
+									Auth.getUser()
 				));
 		} else {
 			return redirect("/");

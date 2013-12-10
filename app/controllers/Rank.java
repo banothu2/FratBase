@@ -92,7 +92,7 @@ public class Rank extends Controller {
 			listOfAllGreeks.get(i).index = i+1;
 		}
 
-		return ok(greekRankResult.render(listOfAllGreeks));
+		return ok(greekRankResult.render(listOfAllGreeks, Auth.getUser()));
 
 		//return redirect("/rank/result");
 		// return ok(greekRankResult.render(listOfAllGreeks));

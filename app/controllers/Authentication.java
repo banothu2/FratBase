@@ -65,6 +65,30 @@ public class Authentication extends Controller {
     }
 
 
+
+
+
+    public static Result renderAddMemberPage(){
+
+        return ok(memberRegister.render(
+                            Auth.getUser()
+            ));
+    }
+
+    public static Result addMember(){
+        if(!Auth.isLoggedIn()){
+            return redirect("/auth/login");
+        } else {
+            RegisterModel data = new Form<RegisterModel>(RegisterModel.class).bindFromRequest().get();
+            data.greekId = Auth.getUser().greek.id;
+
+            createUser(data);
+
+
+            return redirect("/user/addMembers");
+        }
+
+    }
     
     public static Result login(){
         if(Auth.isLoggedIn()){

@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/public/css/bootstrap.css" rel="stylesheet">
+    <link href="/public/css/full.css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
@@ -37,35 +38,20 @@
              query: 'SELECT uid, first_name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
              access_token: access_token
            },function(response){
-           		
               var friendList = "";
               for(var i = 0; i < response.length; i++){
            		  if (i > 0) friendList += ",";
                 friendList += response[i].uid;
-
-              //	$("ol").append("<li>"+"<img src='"+response[i].pic+"' alt='ummm'/>"+response[i].first_name+"</li>");
               }
                 $.post("/rank/userFacebookFriends", {
                   friends: friendList
                 }, 
                 function(data, status){
-                  //alert("Data: " + data + "\nStatus: "+ status);
                   document.write(data);
-
-                    //if(data == "Added"){
-                      //alert("Sent data successfully!");
-                      //document.write(data);
-
-                    //}
                 })
-
-          console.log(response);
         });
       }
-
       var access_token;
-
-
       FB.Event.subscribe('auth.authResponseChange', function(response) {
         // Here we specify what we do with the response anytime this event occurs. 
         if (response.status === 'connected') {
@@ -89,14 +75,20 @@
       }(document));
     </script>
 
-    <div>
-    	<button type="button" onclick="FB.login();">Click me to generate Graph</button>
+
+
+    <div id="fullscreen_bg" class="fullscreen_bg"/>
+
+    <div class="container" style="margin-top: 25%;">
+
+      <form class="form-signin" >
+        <button class="btn btn-lg btn-success btn-block" type="button" onclick="FB.login();">
+        Sign In With Facebook
+        </button>
+      </form>
+
     </div>
-    <div> 
-    	<h3> Friends also using app </h3>
-    	<ol> <!-- this is where it populates the friends in common -->
-		</ol>
-    </div>
+
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
