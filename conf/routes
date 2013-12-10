@@ -31,6 +31,7 @@ GET     /user/events                controllers.Events.renderEventPage()
 POST   /events                      controllers.Events.createEvent()
 POST   /events/suggest                      controllers.Events.suggestEvent()
 GET    /events/attend/:id          controllers.Events.attendEvent(id: Integer)
+GET    /events/unattend/:id          controllers.Events.unattendEvent(id: Integer)
 
 #GET    /clients                    controllers.Clients.list(page: Integer ?= 1)
 

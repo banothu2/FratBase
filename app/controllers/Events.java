@@ -2,7 +2,13 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.avaje.ebean.*;
 
 import auth.Auth;
 
@@ -14,19 +20,36 @@ import viewmodels.*;
 import views.html.*;
 import views.html.helper.form;
 import play.data.*;
+import play.data.format.Formats;
 
 
 public class Events extends Controller {
 	public static Result renderEventPage(){
 		if(Auth.isLoggedIn()){
-			List<Event> listOfEvents = Event.find
+			List<Event> listOfEvents = Ebean.find(Event.class)
 								.where()
 								.eq("greek.id", Auth.getUser().greek.id)
+								.orderBy("startDateAndTime")
 								.findList();
-
+			
+			List<Attend> attends = Attend.find.where().eq("user.id", Auth.getUserId()).findList();
+			List<AEvent> aevents = new ArrayList<AEvent>();
+			
+			for (Event event : listOfEvents) {
+				AEvent aevent = new AEvent();
+				aevent.event = event;
+				
+				for (Attend attend : attends) {
+					if (attend.event.id == event.id) {
+						aevent.attending = true;
+					}
+				}
+				aevents.add(aevent);
+			}
+			
 			return ok(events.render(
-								listOfEvents,
-								Auth.getUser()
+					aevents,
+					Auth.getUser()
 				));
 
 		} else {
@@ -99,7 +122,7 @@ public class Events extends Controller {
 		for (int i = 0; i < events.size(); i++) {
 			Event event = events.get(i);
 			double score = 1;
-			
+			RawSql s;
 			// If I have marked me as attending give a huge bonus
 			boolean iAttend = Attend.find.where()
 				.eq("user.id", Auth.getUserId())
@@ -198,6 +221,21 @@ public class Events extends Controller {
 			attend.user = Auth.getUser();
 			attend.event = Event.find.byId(Long.valueOf(id));
 			attend.save();
+			
+			return redirect("/user/events");
+		} else {
+			return redirect("/");
+		}
+	}
+	
+	public static Result unattendEvent(int id){
+		if(Auth.isLoggedIn()){
+			Attend attend = Attend.find.where()
+					.eq("event.id", id)
+					.eq("user.id", Auth.getUserId())
+					.findUnique();
+			
+			attend.delete();
 			
 			return redirect("/user/events");
 		} else {

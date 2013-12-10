@@ -1,4 +1,4 @@
-@(listOfEvents: List[Event])(user: User)
+@(listOfEvents: List[AEvent])(user: User)
 <!DOCTYPE html>
 <html lang="en">
 <!--(age: String)(sex: String)(graduationDate: String)(major: String)-->
@@ -171,15 +171,21 @@
                 <tbody>
                   @for(event <-listOfEvents){
                     <tr>
-					            <td>@event.id</td>
-                      <td>@event.name</td>
-                      <td>@event.eventType</td>
-                      <td>@event.greek.name</td>
-                      <td>@event.openEvent</td>
-                      <td>@event.location</td>
-                      <td>@event.startDateAndTime</td>
-                      <td>@event.endDateAndTime</td>
-                      <td><a href="/events/attend/@event.id">Attend Event!</a></td>
+		              <td>@event.event.id</td>
+                      <td>@event.event.name</td>
+                      <td>@event.event.eventType</td>
+                      <td>@event.event.greek.name</td>
+                      <td>@event.event.openEvent</td>
+                      <td>@event.event.location</td>
+                      <td>@event.event.startDateAndTime</td>
+                      <td>@event.event.endDateAndTime</td>
+                      <td>
+                      	@if(!event.attending) {
+	                      <a href="/events/attend/@event.event.id">Attend Event!</a>
+	                    } else {
+	                      <a href="/events/unattend/@event.event.id">Unattend Event!</a>	                    
+	                    }
+                      </td>
                     </tr>
                   }
                 </tbody>
