@@ -34,11 +34,30 @@
         FB.api(
            {
              method: 'fql.query',
-             query: 'SELECT uid,first_name,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
+             query: 'SELECT uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) and is_app_user limit 6',
              access_token: access_token
            },function(response){
            		for(var i = 0; i < response.length; i++){
            			$("ol").append("<li>"+"<img src='"+response[i].pic+"' alt='ummm'/>"+response[i].first_name+"</li>");
+
+
+                $.post("/rank/userFacebookFriends", {
+                  friend: response
+                }, 
+
+                function(data, status){
+                  alert("Data: " + data + "\nStatus: "+ status);
+                    if(data == "Added"){
+                      alert("Sent data successfully!");
+                      window.location.replace("/rank");
+
+                    }
+                })
+
+
+
+
+                // need to do a post and pass in your friends 
            		}
 
           console.log(response);
@@ -76,7 +95,7 @@
     </div>
     <div> 
     	<h3> Friends also using app </h3>
-    	<ol>
+    	<ol> <!-- this is where it populates the friends in common -->
 		</ol>
     </div>
     <!-- Bootstrap core JavaScript -->

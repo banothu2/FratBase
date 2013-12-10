@@ -20,8 +20,4 @@ public class Application extends Controller {
     	return ok(loggedIn.render("You are logged in!"));
     }
 
-    public static Result test(){
-        return ok(test.render("welcome!"));
-    }
-
 }

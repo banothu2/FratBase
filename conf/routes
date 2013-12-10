@@ -35,7 +35,8 @@ GET    /events/attend/:id          controllers.Events.attendEvent(id: Integer)
 #GET    /clients                    controllers.Clients.list(page: Integer ?= 1)
 
 GET     /user/users                 controllers.Authentication.userList()
-GET     /test						controllers.Application.test()
+GET     /rank						controllers.Rank.renderRankPage()
+POST    /rank/userFacebookFriends       controllers.Rank.userFacebookFriends()
 
 GET     /profile/:username			controllers.Users.getProfile(username: String)
 
