@@ -1,0 +1,57 @@
+@(listOfGreeks: List[GreekRank])
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Small Business Template with Logo for Bootstrap 3</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  </head>
+  <body>
+    <div> 
+    	<h3> Your personalized recommendation!</h3>
+      <div>
+          <table class="table table-list-search">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Greek Organization</th>
+                <th>Greek University</th>
+                <th>Number of Friends in Common</th>
+                <th>Number of Events Hosted</th>
+                <th>Number of Service Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              @listOfGreeks.map{ greek=>
+                <tr>
+                  <td>@greek.index</td>
+                  <td>@greek.name</td>
+                  <td>@greek.university</td>
+                  <td>@greek.commonFriendCount</td>
+                  <td>@greek.numberOfEvents</td>
+                  <td>@greek.numberOfServiceHours</td>
+                </tr>
+
+              }
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/js/bootstrap.js"></script>
+  </body>
+</html>

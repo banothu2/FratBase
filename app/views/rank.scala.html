@@ -49,12 +49,14 @@
                   friends: friendList
                 }, 
                 function(data, status){
-                  alert("Data: " + data + "\nStatus: "+ status);
-                    if(data == "Added"){
-                      alert("Sent data successfully!");
-                      window.location.replace("/rank");
+                  //alert("Data: " + data + "\nStatus: "+ status);
+                  document.write(data);
 
-                    }
+                    //if(data == "Added"){
+                      //alert("Sent data successfully!");
+                      //document.write(data);
+
+                    //}
                 })
 
           console.log(response);
