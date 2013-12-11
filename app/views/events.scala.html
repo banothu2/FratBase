@@ -178,9 +178,9 @@
                       <td>@event.event.endDateAndTime</td>
                       <td>
                       	@if(!event.attending) {
-	                      <button type="button" class="btn btn-primary" href="/events/attend/@event.event.id">Attend Event!</button>
+	                      <button type="button" class="btn btn-primary" onclick="window.location.href = '/events/attend/@event.event.id';">Attend Event!</button>
 	                    } else {
-                        <button type="button" class="btn btn-success" href="/events/unattend/@event.event.id">Unattend Event!</button>                    
+                        <button type="button" class="btn btn-success" onclick="window.location.href = '/events/unattend/@event.event.id';">Unattend Event!</button>                    
 	                    }
                       </td>
                     </tr>
