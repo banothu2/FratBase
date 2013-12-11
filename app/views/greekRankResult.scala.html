@@ -78,15 +78,19 @@
                     <th>Greek Organization</th>
                     <th>Greek University</th>
                     <th>Number of Friends in Common</th>
+                    <th>Number of Events</th>
+                    <th>Number of Service Hours</th>
                   </tr>
                 </thead>
                 <tbody>
                   @listOfGreeks.map{ greek=>
                     <tr>
-                      <td>@greek.index</td>
+                      <td> <a href="#" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>#@greek.index</a></td>
                       <td>@greek.name</td>
                       <td>@greek.university</td>
-                      <td>@greek.commonFriendCount</td>
+                      <td><a href="#" class="btn btn-primary btn-lg btn-block" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> <br/>@greek.commonFriendCount</a></td>
+                      <td><a href="#" class="btn btn-info btn-lg btn-block" role="button"><span class="glyphicon glyphicon-calendar"></span> <br/>@greek.numberOfEvents</a></td>
+                      <td><a href="#" class="btn btn-danger btn-lg btn-block" role="button"><span class="glyphicon glyphicon-heart"></span> <br/>@greek.numberOfServiceHours</a></td>
                     </tr>
 
                   }

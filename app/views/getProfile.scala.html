@@ -1,4 +1,4 @@
-@(user: User)(userAddress: Address)
+@(user: User)(profile: User)(userAddress: Address)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@user.firstName @user.lastName's Profile</title>
+    <title>@profile.firstName @profile.lastName's Profile</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/public/css/bootstrap.css" rel="stylesheet">
@@ -18,6 +18,52 @@
     <link href="/public/css/spec/thumbnail-gallery.css" rel="stylesheet">
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    <style>
+      #map-canvas {
+        height: 200px;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+    	@if(userAddress != null){
+			function initialize() {
+			  geocoder = new google.maps.Geocoder();
+
+			  var champaign = new google.maps.LatLng(40.1071669, -88.2296);
+
+			  var mapOptions = {
+			    zoom: 15,
+			    center: champaign
+			  }
+			  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	          var address = "@userAddress.addressLineOne, @userAddress.city, @userAddress.state";
+
+	          geocoder.geocode( { 'address': address}, function(results, status) {
+	            if (status == google.maps.GeocoderStatus.OK) {
+	              map.setCenter(results[0].geometry.location);
+
+
+	              var marker = new google.maps.Marker({
+	                  map: map,
+	                  position: results[0].geometry.location
+	                });
+
+
+	            } else {
+	              alert('Geocode was not successful for the following reason: ' + status);
+	            }
+	          });
+			}
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+		}
+
+    </script>
+
   </head>
 
   <body>
@@ -53,7 +99,7 @@
                 </li>
                 <li><a href="/user/profile">Profile</a></li>
                 <li class="divider"></li>
-                @if(user.accessLevel ==1){
+                @if(user.accessLevel == 1){
                   <li><a href="/user/addMembers">Add Users</a></li>
                   <li><a href="/user/servicelog">Add Service Hours</a></li>
                   <li><a href="/user/events">Add Events</a></li>
@@ -74,10 +120,10 @@
     		  @if(user.facebookId == null) {
 	            <a class="thumbnail" href="#"><img class="img-responsive" src="/public/img/profile.jpg"></a>
 	          } else {
-	            <a class="thumbnail" href="#"><img class="img-responsive" src="https://graph.facebook.com/@user.facebookId/picture?width=400&height=500"></a>
+	            <a class="thumbnail" href="#"><img class="img-responsive" src="https://graph.facebook.com/@profile.facebookId/picture?width=400&height=500"></a>
 	          }
-	          <h3>@user.firstName @user.lastName</h3>
-	          <h4>Username: @user.username</h4>
+	          <h3>@profile.firstName @profile.lastName</h3>
+	          <h4>Username: @profile.username</h4>
 
 	          <!--
           	  <div class="span3" style="padding-top: 30px">
@@ -113,68 +159,68 @@
     		</div>
     		<div class="col-lg-5">
     		  <div class="col-lg-12">
-	            <h4 class="page-header">@user.firstName's Profile</h4>
+	            <h4 class="page-header">@profile.firstName's Profile</h4>
 	          </div>
 
 			  <form class="form-horizontal" role="form">
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Greek Name</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.greekName</p>
+			        <p class="form-control-static">@profile.greekName</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Email</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.email</p>
+			        <p class="form-control-static">@profile.email</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">University</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.greek.university</p>
+			        <p class="form-control-static">@profile.greek.university</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Greek Organization</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.greek.name</p>
+			        <p class="form-control-static">@profile.greek.name</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Gender</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.sex</p>
+			        <p class="form-control-static">@profile.sex</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Graduation Year</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.graduationDate</p>
+			        <p class="form-control-static">@profile.graduationDate</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Facebook Account</label>
 			      <div class="col-sm-8">
-			        <a class="form-control-static" href="https://www.facebook.com/@user.facebookId">www.facebook.com/@user.facebookId</a>
+			        <a class="form-control-static" href="https://www.facebook.com/@profile.facebookId">www.facebook.com/@profile.facebookId</a>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">LinkedIn Account</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.linkedIn</p>
+			        <p class="form-control-static">@profile.linkedIn</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Phone Number</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.phoneNumber</p>
+			        <p class="form-control-static">@profile.phoneNumber</p>
 			      </div>
 			    </div>
 			    <div class="form-group">
 			      <label class="col-sm-4 control-label">Relationship Status</label>
 			      <div class="col-sm-8">
-			        <p class="form-control-static">@user.relationshipStatus</p>
+			        <p class="form-control-static">@profile.relationshipStatus</p>
 			      </div>
 			    </div>
 			  </form>
@@ -223,7 +269,7 @@
 				      </div>
 				    </div>
 				    <div>
-				    	 <a class="thumbnail" href="#"><img class="img-responsive" src="http://maps.googleapis.com/maps/api/staticmap?center=@userAddress.addressLineOne,@userAddress.city,@userAddress.state&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284&sensor=false"></a>
+				    	<div id="map-canvas"></div>
 				    </div>
 				  </form>	
 	    		</div>

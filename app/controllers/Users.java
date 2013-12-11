@@ -27,12 +27,38 @@ public class Users extends Controller {
         						.eq("user.id", Auth.getUser().id)
         						.findUnique();
 
+
+        	List<ServiceLog> serviceLog = ServiceLog.find
+        								 	  .where()
+        								 	  .eq("user.id", Auth.getUser().id)
+        								 	  .findList();
+
+        	int philanthropyHours = 0;
+        	int fundraisingHours = 0;
+
+
+        	for(int i = 0; i < serviceLog.size(); i++){
+        		if((serviceLog.get(i).serviceType).equals("Philanthropy")){
+        			philanthropyHours += serviceLog.get(i).hours + (serviceLog.get(i).minutes / 60);
+        		} else {
+        			fundraisingHours += serviceLog.get(i).hours + (serviceLog.get(i).minutes / 60);
+        		}
+        	}
+        	int totalHours = philanthropyHours + fundraisingHours;
+            double philoPercentage = (philanthropyHours / (double) totalHours) *100;
+            double fundraisingPercentage = (fundraisingHours / (double) totalHours)*100;
+
         	User userProfile = Auth.getUser();
 
 			return ok(profile.render(
 						userProfile,
 						users,
-						address
+						address,
+						philanthropyHours,
+						fundraisingHours,
+						totalHours,
+						philoPercentage, 
+						fundraisingPercentage
 					)
 				);
 
@@ -128,8 +154,10 @@ public class Users extends Controller {
 										   .findUnique();
 
 			return ok(getProfile.render(
+									Auth.getUser(),
 									viewUser,
-									userAddress				));
+									userAddress	
+			));
 		} else {
 			return redirect("/");
 		}

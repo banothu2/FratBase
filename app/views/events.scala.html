@@ -156,7 +156,6 @@
               <table class="table table-list-search">
                 <thead>
                     <tr>
-					            <th>#</th>
                       <th>Name</th>
                       <th>Type</th>
                       <th>Greek Org</th>
@@ -170,7 +169,6 @@
                 <tbody>
                   @for(event <-listOfEvents){
                     <tr>
-		              <td>@event.event.id</td>
                       <td>@event.event.name</td>
                       <td>@event.event.eventType</td>
                       <td>@event.event.greek.name</td>
@@ -180,9 +178,9 @@
                       <td>@event.event.endDateAndTime</td>
                       <td>
                       	@if(!event.attending) {
-	                      <a href="/events/attend/@event.event.id">Attend Event!</a>
+	                      <button type="button" class="btn btn-primary" href="/events/attend/@event.event.id">Attend Event!</button>
 	                    } else {
-	                      <a href="/events/unattend/@event.event.id">Unattend Event!</a>	                    
+                        <button type="button" class="btn btn-success" href="/events/unattend/@event.event.id">Unattend Event!</button>                    
 	                    }
                       </td>
                     </tr>
@@ -219,7 +217,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">End Date</label>
               <div class="col-sm-9">
-                <input type="text" pattern="[0-1][0-9]/[0-3][0-9]/[2][0][0-2][0-9] [0-2][0-9]:[0-5][0-9]" class="form-control" id="date" name="endDateAndTime" placeholder="Some name" value="12/12/2013 08:30">
+                <input type="text" pattern="[0-1][0-9]/[0-3][0-9]/[2][0][0-2][0-9] [0-2][0-9]:[0-5][0-9]" class="form-control" id="date" name="endDateAndTime" placeholder="Event Name..." value="12/12/2013 08:30">
               </div>
             </div>
 
@@ -228,8 +226,8 @@
               <label for="inputEmail3" class="col-sm-3 control-label">Open Event</label>
               <div class="col-sm-9">
                 <select class="form-control" name="openEvent">
-                  <option value="true">True</option>
-                  <option value="false">False</option>
+                  <option value="true">Open to all</option>
+                  <option value="false">Restricted to members</option>
                 </select>
               </div>
             </div>
@@ -245,8 +243,12 @@
               <label for="inputEmail3" class="col-sm-3 control-label">Event Type</label>
               <div class="col-sm-9">
                 <select class="form-control" name="eventType">
-                  <option value="Social">Party / Social</option>
-                  <option value="Something">Something</option>
+                  <option value="Social">Social</option>
+                  <option value="Brotherhood">Brotherhood</option>
+                  <option value="Rush">Rush</option>
+                  <option value="Brotherhood">Brotherhood</option>
+                  <option value="Chapter">Chapter</option>
+                  <option value="Informational">Informational</option>
                 </select>
               </div>
             </div>
