@@ -28,7 +28,6 @@ public class Events extends Controller {
 		if(Auth.isLoggedIn()){
 			List<Event> listOfEvents = Ebean.find(Event.class)
 								.where()
-								.eq("greek.id", Auth.getUser().greek.id)
 								.orderBy("startDateAndTime")
 								.findList();
 			

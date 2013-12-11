@@ -20,7 +20,7 @@ public class User extends Model {
 	public String username;
 	public String passwordHash;
 	public String email;
-	
+
 	public int age; 
 	public String sex;
 	public String graduationDate; 
